@@ -1,17 +1,30 @@
 {
   "name": "option-parser",
-  "version": "0.1.0",
+  "version": "0.0.1-alpha.1",
   "description": "Utility lib for parsing command options",
-  "main": "index.js",
+  "main": "dist/src/index.js",
+  "types": "dist/src/types/index.d.ts",
+  "files": [
+    "dist/src/*"
+  ],
   "scripts": {
     "build": "tsc",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jaspenlind/option-parser.git"
   },
-  "keywords": [],
+  "keywords": [
+    "args",
+    "argv",
+    "commandline",
+    "parse",
+    "filter",
+    "typescript",
+    "converter"
+  ],
   "author": "jaspenlind",
   "license": "MIT",
   "bugs": {
@@ -19,15 +32,33 @@
   },
   "homepage": "https://github.com/jaspenlind/option-parser#readme",
   "devDependencies": {
+    "@commitlint/config-conventional": "^8.2.0",
     "@types/jest": "^24.0.18",
     "@types/lodash.escaperegexp": "^4.1.6",
+    "commitlint": "^8.2.0",
+    "coveralls": "^3.0.6",
+    "husky": "^3.0.8",
     "jest": "^24.9.0",
     "jest-extended": "^0.11.2",
+    "lint-staged": "^9.4.2",
     "ts-jest": "^24.1.0",
     "typescript": "^3.6.4"
   },
   "dependencies": {
     "lodash.escaperegexp": "^4.1.2",
     "tslib": "^1.10.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint --fix",
+      "git add",
+      "jest --bail --findRelatedTests"
+    ]
   }
 }
