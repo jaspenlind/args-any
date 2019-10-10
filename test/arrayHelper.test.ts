@@ -1,4 +1,4 @@
-import { any, isEmpty, last, takeWhile } from "../src/lib/arrayHelper";
+import { any, isEmpty, last, takeWhile, lastOrDefault } from "../src/lib/arrayHelper";
 
 describe("arrayHelper", () => {
   describe("any", () => {
@@ -30,6 +30,26 @@ describe("arrayHelper", () => {
 
     it("should be undefined when array is empty", () => {
       expect(last([])).toBeUndefined();
+    });
+  });
+
+  describe("lastOrDefault", () => {
+    it("should be last item of array", () => {
+      const lastItem = "last";
+
+      expect(lastOrDefault(["first", "second", lastItem])).toBe(lastItem);
+    });
+
+    it("should be default value when array is empty", () => {
+      const defaultValue = "default";
+
+      expect(lastOrDefault([], defaultValue)).toBe(defaultValue);
+    });
+
+    it("should be default value when array is null", () => {
+      const defaultValue = "default";
+
+      expect(lastOrDefault(null, defaultValue)).toBe(defaultValue);
     });
   });
 

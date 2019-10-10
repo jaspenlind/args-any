@@ -37,15 +37,23 @@ const parseSegment = (current: string, prev?: OptionSegment, options?: Partial<P
 
   const isFlag = flags.find(x => x === currentKey) !== undefined;
 
-  let value = isFlag ? undefined : (prev && prev.value) || remainder;
+  let value: string | undefined;
 
-  if (value && separators.includes(value[0])) {
-    value = value.substring(1);
+  if (!isFlag) {
+    value = (prev && prev.value) || remainder;
+
+    if (value) {
+      const [firstChar] = value;
+
+      if (separators.includes(firstChar)) {
+        value = value.substring(1);
+      }
+    }
   }
 
   const segment: OptionSegment = {
-    key: currentKey,
     isFlag,
+    key: currentKey,
     operand: "",
     value
   };

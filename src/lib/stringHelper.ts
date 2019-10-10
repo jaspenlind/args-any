@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import escaperegexp from "lodash.escaperegexp";
+import { any, firstOrDefault } from "./arrayHelper";
 
 export const isEmpty = (value: string) => value.trim().length === 0;
 
@@ -15,7 +16,7 @@ export const trimStart = (value: string, ...trimChars: string[]) => {
   const find = (): string | null => {
     const match = result.match(matcher);
 
-    return match && match.length > 0 ? match[0] : null;
+    return firstOrDefault(match);
   };
 
   for (let match = find(); match !== null; match = find()) {
@@ -24,5 +25,3 @@ export const trimStart = (value: string, ...trimChars: string[]) => {
 
   return result;
 };
-
-export default { trimStart };
