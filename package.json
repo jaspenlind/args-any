@@ -1,0 +1,33 @@
+{
+  "name": "option-parser",
+  "version": "0.1.0",
+  "description": "Utility lib for parsing command options",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaspenlind/option-parser.git"
+  },
+  "keywords": [],
+  "author": "jaspenlind",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jaspenlind/option-parser/issues"
+  },
+  "homepage": "https://github.com/jaspenlind/option-parser#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@types/lodash.escaperegexp": "^4.1.6",
+    "jest": "^24.9.0",
+    "jest-extended": "^0.11.2",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "lodash.escaperegexp": "^4.1.2",
+    "tslib": "^1.10.0"
+  }
+}
