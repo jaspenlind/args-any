@@ -4,8 +4,8 @@ import { filter } from "../src/lib/partialFilter";
 describe("partialFilter", () => {
   describe("filter", () => {
     const createServer = (name = "name", country = "Sweden"): Server => ({
-      name: name,
-      country: country,
+      name,
+      country,
       flag: "flag"
     });
 

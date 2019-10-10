@@ -1,10 +1,7 @@
 import { OptionSegment, ParseOptions } from "..";
 import parseSegment from "./segment";
 
-export const parse = (
-  args: string[],
-  options?: Partial<ParseOptions>
-): Array<[string, string | undefined]> => {
+export const parse = (args: string[], options?: Partial<ParseOptions>): Array<[string, string | undefined]> => {
   const mappedArgs: Array<[string, string | undefined]> = [];
 
   let prevSegment: OptionSegment | undefined;

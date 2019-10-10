@@ -15,20 +15,16 @@ describe("optionsParser", () => {
     it("can parse key with prefix", () => {
       const options: ParseOptions = { keyPrefix: "filter" };
 
-      expect(optionParser.parse(["-filter.key"], options).has("key")).toBe(
-        true
-      );
-      expect(optionParser.parse(["--filter.key"], options).has("key")).toBe(
-        true
-      );
+      expect(optionParser.parse(["-filter.key"], options).has("key")).toBe(true);
+      expect(optionParser.parse(["--filter.key"], options).has("key")).toBe(true);
     });
 
     it("is empty when args contains no key", () => {
-      expect(optionParser.parse(["nokey"]).size).toBe(0);
+      expect(optionParser.parse(["nokey"])).toBeEmpty();
     });
 
     it("can handle empty args", () => {
-      expect(optionParser.parse([]).size).toBe(0);
+      expect(optionParser.parse([])).toBeEmpty();
     });
 
     it("can parse single option", () => {
@@ -61,20 +57,13 @@ describe("optionsParser", () => {
     });
 
     it("can exclude args that isn't an option", () => {
-      const options = [
-        "arg1",
-        "arg2",
-        "-arg3",
-        "value3",
-        "-arg4",
-        "-arg5",
-        "value5",
-        "value6"
-      ];
+      const validOptionsCount = 3;
+
+      const options = ["arg1", "arg2", "-arg3", "value3", "-arg4", "-arg5", "value5", "value6"];
 
       const map = optionParser.parse(options);
 
-      expect(map.size).toBe(3);
+      expect(map.size).toBe(validOptionsCount);
 
       expect(map.get("arg3")).toBe("value3");
       expect(map.has("arg4")).toBe(true);
@@ -83,27 +72,21 @@ describe("optionsParser", () => {
     });
 
     it("can parse flags", () => {
+      const validOptionsCount = 2;
       const args = ["command", "level2", "-h", "level3", "-arg2", "value2"];
 
       const options = optionParser.parse(args);
 
-      expect(options.size).toBe(2);
+      expect(options.size).toBe(validOptionsCount);
       expect(options.has("h")).toBe(true);
       expect(options.get("h")).toBeUndefined();
       expect(options.get("arg2")).toBe("value2");
     });
 
     it("can parse options with separators", () => {
-      const args = [
-        "-option1=value1",
-        "-option2=value2",
-        "extra",
-        "-option3=value3"
-      ];
+      const args = ["-option1=value1", "-option2=value2", "extra", "-option3=value3"];
 
-      const [option1, option2, option3] = [
-        ...optionParser.parse(args).entries()
-      ];
+      const [option1, option2, option3] = [...optionParser.parse(args).entries()];
 
       expect(option1[0]).toBe("option1");
       expect(option1[1]).toBe("value1");
@@ -129,8 +112,9 @@ describe("optionsParser", () => {
         }
       ];
 
+      const expectedFilterCount = 1;
       const result = optionParser.parse(["-flag", "NO"]).filter(...items);
-      expect(result).toHaveLength(1);
+      expect(result).toHaveLength(expectedFilterCount);
 
       const [first] = result;
       expect(first.name).toBe("server2");

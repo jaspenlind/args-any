@@ -10,9 +10,7 @@ export const trimStart = (value: string, ...trimChars: string[]) => {
 
   let result = value;
 
-  const matcher = new RegExp(
-    `^(${trimChars.map(x => escaperegexp(x)).join("|")})`
-  );
+  const matcher = new RegExp(`^(${trimChars.map(x => escaperegexp(x)).join("|")})`);
 
   const find = (): string | null => {
     const match = result.match(matcher);

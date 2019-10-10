@@ -18,10 +18,7 @@ describe("mapHelper", () => {
 
   describe("lastKey", () => {
     it("should return last key in map", () => {
-      const map = new Map<string, string>([
-        ["firstkey", "firstval"],
-        ["lastkey", "lastval"]
-      ]);
+      const map = new Map<string, string>([["firstkey", "firstval"], ["lastkey", "lastval"]]);
 
       expect(lastKey(map)).toBe("lastkey");
     });
@@ -35,10 +32,7 @@ describe("mapHelper", () => {
 
   describe("toObject", () => {
     it("can convert map to object", () => {
-      const map = new Map<string, string>([
-        ["name", "server1"],
-        ["flag", "SE"]
-      ]);
+      const map = new Map<string, string>([["name", "server1"], ["flag", "SE"]]);
 
       const server: Partial<Server> = toObject(map);
 

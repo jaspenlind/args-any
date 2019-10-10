@@ -1,10 +1,4 @@
-import {
-  convert,
-  StringConvertible,
-  convertToNumber,
-  convertToBoolean,
-  convertToString
-} from "../src/lib/stringConverter";
+import { convert, StringConvertible, convertToNumber, convertToBoolean, convertToString } from "../src/lib/stringConverter";
 
 const toStringFunc = (): StringConvertible => {
   return {

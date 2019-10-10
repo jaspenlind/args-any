@@ -1,9 +1,7 @@
 import { project } from "./partialProjector";
 
-export const filter = <T extends Record<string, any>>(
-  item: T,
-  predicateFilter: Partial<T>
-): boolean => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const filter = <T extends Record<string, any>>(item: T, predicateFilter: Partial<T>): boolean => {
   const projection = project(item, predicateFilter);
 
   return Object.keys(projection).reduce<boolean>((acc, curr) => {

@@ -1,11 +1,9 @@
 #!/usr/bin/env node
-import { StringConvertible, StringLike } from "../types";
+import { StringConvertible, StringConvertedType, StringLike } from "../types";
 
 export { StringConvertible, StringLike };
 
-export const convertToString = (
-  value: StringLike | undefined
-): string | undefined => {
+export const convertToString = (value: StringLike | undefined): string | undefined => {
   if (value === undefined) {
     return undefined;
   }
@@ -13,9 +11,7 @@ export const convertToString = (
   return value.toString !== undefined ? value.toString() : (value as string);
 };
 
-export const convertToBoolean = (
-  value: StringLike | undefined
-): boolean | undefined => {
+export const convertToBoolean = (value: StringLike | undefined): boolean | undefined => {
   const truthy = ["true", "True", "1"];
   const falsy = ["false", "False", "0"];
 
@@ -33,16 +29,12 @@ export const convertToBoolean = (
   return undefined;
 };
 
-export const convertToNumber = (
-  value: StringLike | undefined
-): number | undefined => {
+export const convertToNumber = (value: StringLike | undefined): number | undefined => {
   const valueAsNumber = Number(value);
 
   return Number.isNaN(valueAsNumber) ? undefined : valueAsNumber;
 };
 
-export const convert = (value: StringLike | undefined): any => {
-  return (
-    convertToNumber(value) || convertToBoolean(value) || convertToString(value)
-  );
+export const convert = (value: StringLike | undefined): StringConvertedType => {
+  return convertToNumber(value) || convertToBoolean(value) || convertToString(value);
 };

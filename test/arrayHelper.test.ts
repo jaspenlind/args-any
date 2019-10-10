@@ -46,13 +46,7 @@ describe("arrayHelper", () => {
     });
 
     it("should exclude items after item not matching predicate", () => {
-      const items = [
-        { name: "item1" },
-        { name: "item2" },
-        { name: "item3" },
-        { name: "other" },
-        { name: "item4" }
-      ];
+      const items = [{ name: "item1" }, { name: "item2" }, { name: "item3" }, { name: "other" }, { name: "item4" }];
       const result = takeWhile(items, x => x.name.startsWith("item"));
 
       expect(result).toHaveLength(3);

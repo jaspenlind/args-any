@@ -6,10 +6,7 @@ const flags = ["h", "debug"];
 const separators = ["=", ":"];
 const dash = "-";
 
-const parseKey = (
-  segment: string,
-  options?: Partial<ParseOptions>
-): [string | undefined, string | undefined] => {
+const parseKey = (segment: string, options?: Partial<ParseOptions>): [string | undefined, string | undefined] => {
   const isKey = segment.startsWith(dash) && segment.length > 1;
 
   if (!isKey) {
@@ -23,19 +20,13 @@ const parseKey = (
 
   const withoutPrefix = trimStart(segment, ...trimChars);
 
-  const key = takeWhile([...withoutPrefix], x => !separators.includes(x)).join(
-    ""
-  );
+  const key = takeWhile([...withoutPrefix], x => !separators.includes(x)).join("");
 
   const value = withoutPrefix.substring(key.length);
   return [key, value === "" ? undefined : value];
 };
 
-const parseSegment = (
-  current: string,
-  prev?: OptionSegment,
-  options?: Partial<ParseOptions>
-): OptionSegment | undefined => {
+const parseSegment = (current: string, prev?: OptionSegment, options?: Partial<ParseOptions>): OptionSegment | undefined => {
   const [key, remainder] = parseKey(current, options);
 
   const currentKey = key || (prev && prev.key);
