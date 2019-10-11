@@ -26,7 +26,7 @@ const parseKey = (segment: string, settings?: Partial<ParserSettings>): [string 
   return [key, value === "" ? undefined : value];
 };
 
-const parseSegment = (
+export const parse = (
   current: string,
   prev?: OptionSegment,
   settings?: Partial<ParserSettings>
@@ -64,5 +64,3 @@ const parseSegment = (
 
   return segment;
 };
-
-export default parseSegment;

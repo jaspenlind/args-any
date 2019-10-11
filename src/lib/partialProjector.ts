@@ -13,7 +13,3 @@ export const project = <T extends OpenRecord>(item: T, projector: Partial<T>): P
 
   return projection as Partial<T>;
 };
-
-export default {
-  project
-};

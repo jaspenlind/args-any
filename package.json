@@ -3,7 +3,7 @@
   "version": "0.0.1-alpha.3",
   "description": "Utility lib for parsing command options",
   "main": "dist/src/index.js",
-  "types": "dist/src/types/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "files": [
     "dist/src/*"
   ],
