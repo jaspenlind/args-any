@@ -11,7 +11,7 @@ export enum OptionOperand {
 export { OptionSegment, OptionParser, ParseOptions };
 
 const parse = (args: string[], options?: Partial<ParseOptions>): OptionParser => {
-  const map = new Map<string, string | undefined>(parseOptions(args, options));
+  const map = parseOptions(args, options);
 
   const asPartial = () => toObject(map);
 

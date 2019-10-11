@@ -5,7 +5,9 @@ export const any = <K, V>(map: Map<K, V> | ReadonlyMap<K, V>) => map.size > 0;
 
 export const lastKey = <K, V>(map: Map<K, V> | ReadonlyMap<K, V>) => [...map.keys()].pop();
 
-export const toObject = <T, V extends StringLike | undefined>(map: Map<string, V> | ReadonlyMap<string, V>): Partial<T> => {
+export const toObject = <T, V extends StringLike | undefined>(
+  map: Map<string, V> | ReadonlyMap<string, V>
+): Partial<T> => {
   const obj: Partial<T> = {};
 
   map.forEach((value, key) => {

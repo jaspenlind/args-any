@@ -1,16 +1,23 @@
 #!/usr/bin/env node
 type NullableArray<T> = ArrayLike<T> | null;
 
-export const any = <T>(array: NullableArray<T>) => (array && array.length > 0) || false;
+export const indeces = {
+  empty: 0,
+  first: 0,
+  lastIndexSubtrahend: 1
+};
+
+export const any = <T>(array: NullableArray<T>) => (array && array.length > indeces.empty) || false;
 
 export const isEmpty = <T>(array: NullableArray<T>) => !any(array);
 
-export const firstOrDefault = <T>(array: NullableArray<T>, defaultValue: T | null = null): T | null => (array && array[0]) || defaultValue;
+export const firstOrDefault = <T>(array: NullableArray<T>, defaultValue: T | null = null): T | null =>
+  (array && array[indeces.first]) || defaultValue;
 
 export const first = <T>(array: NullableArray<T>) => firstOrDefault(array) || undefined;
 
 export const lastOrDefault = <T>(array: NullableArray<T>, defaultValue: T | null = null): T | null =>
-  (array && array[array.length - 1]) || defaultValue;
+  (array && array[array.length - indeces.lastIndexSubtrahend]) || defaultValue;
 
 export const last = <T>(array: NullableArray<T>) => lastOrDefault(array) || undefined;
 

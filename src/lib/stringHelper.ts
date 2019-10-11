@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import escaperegexp from "lodash.escaperegexp";
-import { any, firstOrDefault } from "./arrayHelper";
+import { firstOrDefault, indeces } from "./arrayHelper";
 
-export const isEmpty = (value: string) => value.trim().length === 0;
+export const isEmpty = (value: string) => value.trim().length === indeces.empty;
 
 export const trimStart = (value: string, ...trimChars: string[]) => {
   if (isEmpty(value)) {

@@ -55,8 +55,8 @@ describe("arrayHelper", () => {
 
   describe("takeWhile", () => {
     it("can handle empty arrays", () => {
-      expect(takeWhile([], () => true)).toHaveLength(0);
-      expect(takeWhile([], () => false)).toHaveLength(0);
+      expect(takeWhile([], () => true)).toBeEmpty();
+      expect(takeWhile([], () => false)).toBeEmpty();
     });
 
     it("should return all items when predicate matches each", () => {

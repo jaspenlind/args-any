@@ -4,9 +4,9 @@ import { filter } from "../src/lib/partialFilter";
 describe("partialFilter", () => {
   describe("filter", () => {
     const createServer = (name = "name", country = "Sweden"): Server => ({
-      name,
       country,
-      flag: "flag"
+      flag: "flag",
+      name
     });
 
     it("should be true when item matches filter", () => {

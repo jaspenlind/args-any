@@ -26,7 +26,11 @@ const parseKey = (segment: string, options?: Partial<ParseOptions>): [string | u
   return [key, value === "" ? undefined : value];
 };
 
-const parseSegment = (current: string, prev?: OptionSegment, options?: Partial<ParseOptions>): OptionSegment | undefined => {
+const parseSegment = (
+  current: string,
+  prev?: OptionSegment,
+  options?: Partial<ParseOptions>
+): OptionSegment | undefined => {
   const [key, remainder] = parseKey(current, options);
 
   const currentKey = key || (prev && prev.key);

@@ -1,4 +1,10 @@
-import { convert, StringConvertible, convertToNumber, convertToBoolean, convertToString } from "../src/lib/stringConverter";
+import {
+  convert,
+  StringConvertible,
+  convertToNumber,
+  convertToBoolean,
+  convertToString
+} from "../src/lib/stringConverter";
 
 const toStringFunc = (): StringConvertible => {
   return {
@@ -27,7 +33,8 @@ describe("stringConverter", () => {
 
   describe("convertToNumber", () => {
     it("can convert to number", () => {
-      expect(convertToNumber(42)).toBe(42);
+      const number = 42;
+      expect(convertToNumber(number)).toBe(number);
     });
 
     it("can handle undefined", () => {

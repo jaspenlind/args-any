@@ -36,11 +36,13 @@ describe("optionsParser", () => {
     });
 
     it("can parse multiple options", () => {
+      const numberOfOptions = 5;
+
       const options = ["-a", "1", "-b", "2", "-c", "3", "-d", "4", "-e", "5"];
 
       const map = optionParser.parse(options);
 
-      expect(map.size).toBe(5);
+      expect(map.size).toBe(numberOfOptions);
       expect(map.get("a")).toBe("1");
       expect(map.get("e")).toBe("5");
     });
@@ -88,12 +90,15 @@ describe("optionsParser", () => {
 
       const [option1, option2, option3] = [...optionParser.parse(args).entries()];
 
-      expect(option1[0]).toBe("option1");
-      expect(option1[1]).toBe("value1");
-      expect(option2[0]).toBe("option2");
-      expect(option2[1]).toBe("value2");
-      expect(option3[0]).toBe("option3");
-      expect(option3[1]).toBe("value3");
+      const keyIndex = 0;
+      const valueIndex = 1;
+
+      expect(option1[keyIndex]).toBe("option1");
+      expect(option1[valueIndex]).toBe("value1");
+      expect(option2[keyIndex]).toBe("option2");
+      expect(option2[valueIndex]).toBe("value2");
+      expect(option3[keyIndex]).toBe("option3");
+      expect(option3[valueIndex]).toBe("value3");
     });
   });
 
@@ -101,14 +106,14 @@ describe("optionsParser", () => {
     it("can filter items", () => {
       const items: Server[] = [
         {
-          name: "server1",
           country: "Sweden",
-          flag: "SE"
+          flag: "SE",
+          name: "server1"
         },
         {
-          name: "server2",
           country: "Norway",
-          flag: "NO"
+          flag: "NO",
+          name: "server2"
         }
       ];
 
