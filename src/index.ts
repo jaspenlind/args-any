@@ -1,5 +1,5 @@
-import parser, { ParseOptions } from "./lib";
+import { optionParser } from "./lib";
 
-export { ParseOptions };
+export * from "./types";
 
-export default parser;
+export default optionParser;

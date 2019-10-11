@@ -1,5 +1,5 @@
 import "jest-extended";
-import optionParser, { ParseOptions } from "../src";
+import optionParser, { ParserSettings } from "../src";
 import { Server } from "./testData";
 
 describe("optionsParser", () => {
@@ -13,7 +13,7 @@ describe("optionsParser", () => {
     });
 
     it("can parse key with prefix", () => {
-      const options: ParseOptions = { keyPrefix: "filter" };
+      const options: ParserSettings = { keyPrefix: "filter" };
 
       expect(optionParser.parse(["-filter.key"], options).has("key")).toBe(true);
       expect(optionParser.parse(["--filter.key"], options).has("key")).toBe(true);

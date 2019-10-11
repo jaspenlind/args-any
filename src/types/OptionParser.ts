@@ -1,6 +1,5 @@
-export default interface OptionParser
-  extends ReadonlyMap<string, string | undefined> {
-  asPartial: <T>() => Partial<T>;
-  filter: <T>(...items: T[]) => T[];
-  unwrap: () => string[];
+import { ParsedOptions, ParserSettings } from ".";
+
+export interface OptionParser {
+  parse: (args: string[], settings?: Partial<ParserSettings>) => ParsedOptions;
 }

@@ -1,7 +1,7 @@
-import { OptionSegment, ParseOptions } from "..";
+import { OptionSegment, ParserSettings } from "../../types";
 import parseSegment from "./segment";
 
-export const parse = (args: string[], options?: Partial<ParseOptions>): Map<string, string | undefined> => {
+export const parse = (args: string[], options?: Partial<ParserSettings>): Map<string, string | undefined> => {
   const map = new Map<string, string | undefined>();
 
   let prevSegment: OptionSegment | undefined;

@@ -1,12 +1,12 @@
 import { takeWhile } from "../arrayHelper";
 import { trimStart } from "../stringHelper";
-import { OptionSegment, ParseOptions } from "..";
+import { OptionSegment, ParserSettings } from "../../types";
 
 const flags = ["h", "debug"];
 const separators = ["=", ":"];
 const dash = "-";
 
-const parseKey = (segment: string, options?: Partial<ParseOptions>): [string | undefined, string | undefined] => {
+const parseKey = (segment: string, settings?: Partial<ParserSettings>): [string | undefined, string | undefined] => {
   const isKey = segment.startsWith(dash) && segment.length > 1;
 
   if (!isKey) {
@@ -14,8 +14,8 @@ const parseKey = (segment: string, options?: Partial<ParseOptions>): [string | u
   }
 
   const trimChars = [dash];
-  if (options && options.keyPrefix) {
-    trimChars.push(options.keyPrefix, ".");
+  if (settings && settings.keyPrefix) {
+    trimChars.push(settings.keyPrefix, ".");
   }
 
   const withoutPrefix = trimStart(segment, ...trimChars);
@@ -29,9 +29,9 @@ const parseKey = (segment: string, options?: Partial<ParseOptions>): [string | u
 const parseSegment = (
   current: string,
   prev?: OptionSegment,
-  options?: Partial<ParseOptions>
+  settings?: Partial<ParserSettings>
 ): OptionSegment | undefined => {
-  const [key, remainder] = parseKey(current, options);
+  const [key, remainder] = parseKey(current, settings);
 
   const currentKey = key || (prev && prev.key);
 
