@@ -9,7 +9,7 @@ export class ReadonlyMap<K, V> implements ReadonlyMap<K, V> {
     return this.map.get(key);
   }
 
-  forEach(callbackfn: (value: V, key: K, map: Map<K, V>) => void, thisArg?: any): void {
+  public forEach(callbackfn: (value: V, key: K, map: Map<K, V>) => void, thisArg?: any): void {
     this.map.forEach(callbackfn, thisArg);
   }
 
@@ -21,19 +21,19 @@ export class ReadonlyMap<K, V> implements ReadonlyMap<K, V> {
     return this.map.size;
   }
 
-  [Symbol.iterator](): IterableIterator<[K, V]> {
+  public [Symbol.iterator](): IterableIterator<[K, V]> {
     return this.map[Symbol.iterator]();
   }
 
-  entries(): IterableIterator<[K, V]> {
+  public entries(): IterableIterator<[K, V]> {
     return this.map.entries();
   }
 
-  keys(): IterableIterator<K> {
+  public keys(): IterableIterator<K> {
     return this.map.keys();
   }
 
-  values(): IterableIterator<V> {
+  public values(): IterableIterator<V> {
     return this.map.values();
   }
 }

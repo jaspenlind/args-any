@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import { convert, StringLike } from "./stringConverter";
+import { indeces } from "./arrayHelper";
 
-export const any = <K, V>(map: Map<K, V> | ReadonlyMap<K, V>) => map.size > 0;
+export const any = <K, V>(map: Map<K, V> | ReadonlyMap<K, V>) => map.size > indeces.empty;
 
 export const lastKey = <K, V>(map: Map<K, V> | ReadonlyMap<K, V>) => [...map.keys()].pop();
 
