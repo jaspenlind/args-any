@@ -146,13 +146,13 @@ describe("optionsParser", () => {
     });
   });
 
-  describe("unwrap", () => {
-    it("can unwrap args", () => {
+  describe("args", () => {
+    it("can return args", () => {
       const args = ["-option1", "value1"];
 
       const options = optionParser.parse(args);
 
-      const [key, value] = options.unwrap();
+      const [key, value] = options.args.all();
 
       expect(key).toBe("-option1");
       expect(value).toBe("value1");

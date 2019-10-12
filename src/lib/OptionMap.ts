@@ -1,18 +1,19 @@
-import { ParserSettings, ReadonlyMap } from "../types";
+import { ArgContainer, ParserSettings, ReadonlyMap } from "../types";
+import { argContainer } from ".";
 import { filter } from "./partialFilter";
 import { parse, prefixless } from "./parse";
 import { toObject } from "./mapHelper";
 
 export class OptionMap extends ReadonlyMap<string, string | undefined> {
-  private readonly args: string[];
-
   private readonly settings?: Partial<ParserSettings>;
 
   constructor(args: string[], settings?: Partial<ParserSettings>) {
     super(parse(args, settings));
-    this.args = args;
+    this.args = argContainer(args, this);
     this.settings = settings;
   }
+
+  public readonly args: ArgContainer;
 
   public asPartial<T>(): Partial<T> {
     return toObject(this);
@@ -29,9 +30,5 @@ export class OptionMap extends ReadonlyMap<string, string | undefined> {
 
   public has(key: string): boolean {
     return super.has(prefixless(key, this.settings));
-  }
-
-  public unwrap(): string[] {
-    return this.args;
   }
 }

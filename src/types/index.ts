@@ -1,3 +1,4 @@
+export { ArgContainer } from "./ArgContainer";
 export { StringConvertedType } from "./StringConvertedType";
 export { OptionMap } from "./OptionMap";
 export { OpenRecord } from "./OpenRecord";
