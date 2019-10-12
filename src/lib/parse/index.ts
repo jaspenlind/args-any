@@ -1,3 +1,2 @@
-import { parse } from "./options";
-
-export { parse };
+export { parse } from "./options";
+export { prefixless } from "./prefixless";

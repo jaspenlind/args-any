@@ -1,10 +1,10 @@
 import { takeWhile } from "../arrayHelper";
-import { trimStart } from "../stringHelper";
+import { prefixless } from ".";
 import { OptionSegment, ParserSettings } from "../../types";
 
 const flags = ["h", "debug"];
 const separators = ["=", ":"];
-const dash = "-";
+export const dash = "-";
 
 const parseKey = (segment: string, settings?: Partial<ParserSettings>): [string | undefined, string | undefined] => {
   const isKey = segment.startsWith(dash) && segment.length > 1;
@@ -13,12 +13,7 @@ const parseKey = (segment: string, settings?: Partial<ParserSettings>): [string 
     return [undefined, segment];
   }
 
-  const trimChars = [dash];
-  if (settings && settings.keyPrefix) {
-    trimChars.push(settings.keyPrefix, ".");
-  }
-
-  const withoutPrefix = trimStart(segment, ...trimChars);
+  const withoutPrefix = prefixless(segment, settings);
 
   const key = takeWhile([...withoutPrefix], x => !separators.includes(x)).join("");
 

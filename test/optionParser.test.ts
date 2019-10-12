@@ -100,6 +100,26 @@ describe("optionsParser", () => {
       expect(option3[keyIndex]).toBe("option3");
       expect(option3[valueIndex]).toBe("value3");
     });
+
+    it("can get option with or without dash", () => {
+      const value = "value";
+      const options = optionParser.parse(["-option1", value]);
+
+      expect(options.get("option1")).toBe(value);
+      expect(options.get("-option1")).toBe(value);
+      expect(options.get("--option1")).toBe(value);
+    });
+
+    it("can get option with out without prefix", () => {
+      const value = "value";
+      const options = optionParser.parse(["-filter.option1", value], { keyPrefix: "filter" });
+
+      expect(options.get("option1")).toBe(value);
+      expect(options.get("-option1")).toBe(value);
+      expect(options.get("--option1")).toBe(value);
+      expect(options.get("-filter.option1")).toBe(value);
+      expect(options.get("--filter.option1")).toBe(value);
+    });
   });
 
   describe("filter", () => {
