@@ -1,4 +1,4 @@
-import { takeWhile } from "../arrayHelper";
+import { takeWhile } from "lodash-es";
 import { prefixless } from ".";
 import { OptionSegment, ParserSettings } from "../../types";
 

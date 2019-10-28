@@ -2,7 +2,8 @@ module.exports = {
   collectCoverageFrom: ["src/**/{!(*.d.ts),}.{ts,js,.tsx,.jsx}"],
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
   moduleNameMapper: {
-    "^.+\\.(css|scss)$": "identity-obj-proxy"
+    "^.+\\.(css|scss)$": "identity-obj-proxy",
+    "^lodash-es$": "lodash"
   },
   modulePathIgnorePatterns: ["<rootDir>/dist/"],
   preset: "ts-jest",
