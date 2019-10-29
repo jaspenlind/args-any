@@ -1,4 +1,4 @@
-export default interface OptionSegment {
+export interface OptionSegment {
   key: string;
   operand?: string;
   isFlag: boolean;

@@ -1,10 +1,10 @@
-import { ArgContainer, ParserSettings, ReadonlyMap } from "../types";
+import { ArgContainer, Option, ParserSettings, ReadonlyMap } from "../types";
 import { argContainer } from ".";
 import { filter } from "./partialFilter";
 import { parse, prefixless } from "./parse";
 import { toObject } from "./mapHelper";
 
-export class OptionMap extends ReadonlyMap<string, string | undefined> {
+export class OptionMap extends ReadonlyMap<string, Option | undefined> {
   private readonly settings?: Partial<ParserSettings>;
 
   constructor(args: string[], settings?: Partial<ParserSettings>) {
@@ -19,12 +19,13 @@ export class OptionMap extends ReadonlyMap<string, string | undefined> {
     return toObject(this);
   }
 
-  public get(key: string): string | undefined {
+  public get(key: string): Option | undefined {
     return super.get(prefixless(key, this.settings));
   }
 
   public filter<T>(...items: T[]): T[] {
     const filterMap = this.asPartial<T>();
+
     return items.filter(item => filter(filterMap, item));
   }
 

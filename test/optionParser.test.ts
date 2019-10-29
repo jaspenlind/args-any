@@ -1,6 +1,9 @@
 import "jest-extended";
-import optionParser, { ParserSettings } from "../src";
+import optionParser, { ParserSettings, Option } from "../src";
+import { empty } from "../src/models/option";
 import { Server } from "./testData";
+
+const getValue = (option: Option | undefined) => (option && option.value) || undefined;
 
 describe("optionsParser", () => {
   describe("parse", () => {
@@ -32,7 +35,7 @@ describe("optionsParser", () => {
 
       const option = map.get("o");
 
-      expect(option).toBe("option1");
+      expect(option && option.value).toBe("option1");
     });
 
     it("can parse multiple options", () => {
@@ -43,8 +46,8 @@ describe("optionsParser", () => {
       const map = optionParser.parse(options);
 
       expect(map.size).toBe(numberOfOptions);
-      expect(map.get("a")).toBe("1");
-      expect(map.get("e")).toBe("5");
+      expect(getValue(map.get("a"))).toBe("1");
+      expect(getValue(map.get("e"))).toBe("5");
     });
 
     it("can parse option without value", () => {
@@ -67,10 +70,10 @@ describe("optionsParser", () => {
 
       expect(map.size).toBe(validOptionsCount);
 
-      expect(map.get("arg3")).toBe("value3");
+      expect(getValue(map.get("arg3"))).toBe("value3");
       expect(map.has("arg4")).toBe(true);
-      expect(map.get("arg4")).toBeUndefined();
-      expect(map.get("arg5")).toBe("value5");
+      expect(getValue(map.get("arg4"))).toBeUndefined();
+      expect(getValue(map.get("arg5"))).toBe("value5");
     });
 
     it("can parse flags", () => {
@@ -82,7 +85,7 @@ describe("optionsParser", () => {
       expect(options.size).toBe(validOptionsCount);
       expect(options.has("h")).toBe(true);
       expect(options.get("h")).toBeUndefined();
-      expect(options.get("arg2")).toBe("value2");
+      expect(getValue(options.get("arg2"))).toBe("value2");
     });
 
     it("can parse options with separators", () => {
@@ -94,31 +97,31 @@ describe("optionsParser", () => {
       const valueIndex = 1;
 
       expect(option1[keyIndex]).toBe("option1");
-      expect(option1[valueIndex]).toBe("value1");
+      expect((option1[valueIndex] || empty).value).toBe("value1");
       expect(option2[keyIndex]).toBe("option2");
-      expect(option2[valueIndex]).toBe("value2");
+      expect((option2[valueIndex] || empty).value).toBe("value2");
       expect(option3[keyIndex]).toBe("option3");
-      expect(option3[valueIndex]).toBe("value3");
+      expect((option3[valueIndex] || empty).value).toBe("value3");
     });
 
     it("can get option with or without dash", () => {
       const value = "value";
       const options = optionParser.parse(["-option1", value]);
 
-      expect(options.get("option1")).toBe(value);
-      expect(options.get("-option1")).toBe(value);
-      expect(options.get("--option1")).toBe(value);
+      expect(getValue(options.get("option1"))).toBe(value);
+      expect(getValue(options.get("-option1"))).toBe(value);
+      expect(getValue(options.get("--option1"))).toBe(value);
     });
 
-    it("can get option with out without prefix", () => {
+    it("can get option without prefix", () => {
       const value = "value";
       const options = optionParser.parse(["-filter.option1", value], { keyPrefix: "filter" });
 
-      expect(options.get("option1")).toBe(value);
-      expect(options.get("-option1")).toBe(value);
-      expect(options.get("--option1")).toBe(value);
-      expect(options.get("-filter.option1")).toBe(value);
-      expect(options.get("--filter.option1")).toBe(value);
+      expect(getValue(options.get("option1"))).toBe(value);
+      expect(getValue(options.get("-option1"))).toBe(value);
+      expect(getValue(options.get("--option1"))).toBe(value);
+      expect(getValue(options.get("-filter.option1"))).toBe(value);
+      expect(getValue(options.get("--filter.option1"))).toBe(value);
     });
   });
 

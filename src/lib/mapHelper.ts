@@ -8,7 +8,6 @@ export const toObject = <T, V extends StringLike | undefined>(
 
   map.forEach((value, key) => {
     const convertedValue = convert(value);
-
     Reflect.set(obj, key, convertedValue);
   });
 
