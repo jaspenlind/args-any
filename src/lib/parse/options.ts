@@ -1,5 +1,5 @@
 import { OptionSegment, ParserSettings } from "../../types";
-import { create, Option } from "../../models/option";
+import { fromSegment, Option } from "../../models/option";
 import { parse as parseSegment } from "./segment";
 
 export const parse = (args: string[], options?: Partial<ParserSettings>): Map<string, Option | undefined> => {
@@ -10,7 +10,7 @@ export const parse = (args: string[], options?: Partial<ParserSettings>): Map<st
     const segment = parseSegment(arg, prevSegment, options);
 
     if (segment) {
-      const value = segment.value ? create({ value: segment.value }) : undefined;
+      const value = segment.value ? fromSegment(segment) : undefined;
       map.set(segment.key, value);
     }
 
