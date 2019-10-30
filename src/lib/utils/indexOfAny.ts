@@ -1,11 +1,12 @@
+const missing = -1;
+
 export const indexOfAny = (value: string, ...searchStrings: string[]): [number, string | null] => {
-  for (let i = 0; i < searchStrings.length; i += 1) {
-    const current = searchStrings[i];
-    const index = value.indexOf(current);
+  for (const searchString of searchStrings) {
+    const index = value.indexOf(searchString);
     if (index >= 0) {
-      return [index, current];
+      return [index, searchString];
     }
   }
 
-  return [-1, null];
+  return [missing, null];
 };

@@ -21,8 +21,8 @@ describe("partialFilter", () => {
 
     it("should be false when some properties matches filter", () => {
       const itemFilter: Partial<Server> = {
-        name: "name",
-        country: "Norway"
+        country: "Norway",
+        name: "name"
       };
 
       const item = createServer();
@@ -32,8 +32,8 @@ describe("partialFilter", () => {
 
     it("should be false when no properties matches filter", () => {
       const itemFilter: Partial<Server> = {
-        name: "name",
-        country: "Norway"
+        country: "Norway",
+        name: "name"
       };
 
       const item = createServer("other name", "other country");

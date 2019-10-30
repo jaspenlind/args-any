@@ -6,8 +6,8 @@ export { Option, Operator };
 export const empty: Option = Object.freeze({
   key: "",
   operator: defaultOperator,
-  value: "",
-  toString: () => ""
+  toString: () => "",
+  value: ""
 });
 
 export const create = (fields: Partial<Option>): Option => {

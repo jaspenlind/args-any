@@ -35,8 +35,9 @@ describe("indexOfAny", () => {
   });
 
   it("should have negative index when not found", () => {
+    const missing = -1;
     const [index] = indexOfAny("value", "other");
 
-    expect(index).toBe(-1);
+    expect(index).toBe(missing);
   });
 });

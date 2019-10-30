@@ -5,9 +5,9 @@ import { project } from "../src/lib/partialProjector";
 describe("partialProjector", () => {
   describe("project", () => {
     const createServer = (): Server => ({
-      name: "server2",
       country: "country2",
-      flag: "SE"
+      flag: "SE",
+      name: "server2"
     });
 
     it("should have same keys as projector", () => {
@@ -28,8 +28,8 @@ describe("partialProjector", () => {
 
     it("should have values", () => {
       const projector: Partial<Server> = {
-        name: "server1",
-        country: "SE"
+        country: "SE",
+        name: "server1"
       };
 
       const server = createServer();

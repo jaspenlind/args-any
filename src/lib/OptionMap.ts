@@ -33,13 +33,13 @@ const parseNew = (args: string[]): Map<string, Option | undefined> => {
 export class OptionMap extends ReadonlyMap<string, Option | undefined> {
   private readonly settings?: Partial<ParserSettings>;
 
+  public readonly args: ArgContainer;
+
   constructor(args: string[], settings?: Partial<ParserSettings>) {
     super(parse(args, settings));
     this.args = argContainer(args, this);
     this.settings = settings;
   }
-
-  public readonly args: ArgContainer;
 
   public asPartial<T>(): Partial<T> {
     return toObject(this);
