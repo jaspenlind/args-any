@@ -1,8 +1,8 @@
-import { ArgContainer, Option, ParserSettings, ReadonlyMap } from "../types";
+import { ArgContainer, Option, ParserSettings, ReadonlyMap, OpenRecord, Operator } from "../types";
 import { argContainer } from ".";
-import { filter } from "./partialFilter";
 import { parse, prefixless } from "./parse";
 import { toObject } from "./mapHelper";
+import { convert } from "./stringConverter";
 
 export { Option };
 
@@ -25,10 +25,38 @@ export class OptionMap extends ReadonlyMap<string, Option> {
     return super.get(prefixless(key, this.settings));
   }
 
-  public filter<T>(...items: T[]): T[] {
-    const filterMap = this.asPartial<T>();
+  private matches<T extends OpenRecord>(item: T): boolean {
+    return [...this.keys()].reduce<boolean>((acc, curr) => {
+      if (acc === false) return false;
 
-    return items.filter(item => filter(filterMap, item));
+      const itemValue = item[curr];
+      const option = this.get(curr);
+
+      if (option === undefined) return false;
+      const optionValue = convert(option.value);
+
+      switch (option.operator) {
+        case Operator.Ne:
+          return itemValue !== optionValue;
+        case Operator.Ge:
+          return (optionValue && itemValue >= optionValue) || false;
+        case Operator.Gt:
+          return (optionValue && itemValue > optionValue) || false;
+        case Operator.Le:
+          return (optionValue && itemValue <= optionValue) || false;
+        case Operator.Lt:
+          return (optionValue && itemValue < optionValue) || false;
+        default:
+          return itemValue === optionValue;
+      }
+    }, true);
+  }
+
+  public filter<T extends OpenRecord>(...items: T[]): T[] {
+    // allow this alias for now
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const map = this;
+    return items.filter(x => this.matches.call(map, x));
   }
 
   public has(key: string): boolean {

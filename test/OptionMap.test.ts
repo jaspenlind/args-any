@@ -2,6 +2,11 @@ import { Option, OptionMap } from "../src/lib/OptionMap";
 
 const getValue = (option: Option | undefined) => option && option.value;
 
+interface Server {
+  location: string;
+  size: number;
+}
+
 describe("OptionMap", () => {
   describe("has", () => {
     it("should be true when key exists", () => {
@@ -44,6 +49,33 @@ describe("OptionMap", () => {
       expect(map.get("key")).toBeUndefined();
       expect(map.get("-key")).toBeUndefined();
       expect(map.get("--key")).toBeUndefined();
+    });
+  });
+
+  describe("filter", () => {
+    it("can filter items", () => {
+      const items: Server[] = [
+        {
+          location: "SE",
+          size: 1
+        },
+        {
+          location: "SE",
+          size: 5
+        },
+        {
+          location: "NO",
+          size: 7
+        }
+      ];
+      const map = new OptionMap(["-location=SE", "-size>4"]);
+
+      const result = map.filter(...items);
+      const [first] = result;
+
+      expect(result).toHaveLength(1);
+      expect(first.location).toBe("SE");
+      expect(first.size).toBe(5);
     });
   });
 });
