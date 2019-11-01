@@ -1,4 +1,6 @@
-import { OptionMap } from "../src/lib";
+import { Option, OptionMap } from "../src/lib/OptionMap";
+
+const getValue = (option: Option | undefined) => option && option.value;
 
 describe("OptionMap", () => {
   describe("has", () => {
@@ -23,17 +25,17 @@ describe("OptionMap", () => {
     it("should be defined when key exists with value", () => {
       const map = new OptionMap(["-key", "value"]);
 
-      expect(map.get("key")).toBeDefined();
-      expect(map.get("-key")).toBeDefined();
-      expect(map.get("--key")).toBeDefined();
+      expect(getValue(map.get("key"))).toBeDefined();
+      expect(getValue(map.get("-key"))).toBeDefined();
+      expect(getValue(map.get("--key"))).toBeDefined();
     });
 
     it("should be undefined when key exists without value", () => {
       const map = new OptionMap(["-key"]);
 
-      expect(map.get("key")).toBeUndefined();
-      expect(map.get("-key")).toBeUndefined();
-      expect(map.get("--key")).toBeUndefined();
+      expect(getValue(map.get("key"))).toBeUndefined();
+      expect(getValue(map.get("-key"))).toBeUndefined();
+      expect(getValue(map.get("--key"))).toBeUndefined();
     });
 
     it("should be undefined when key does not exist", () => {

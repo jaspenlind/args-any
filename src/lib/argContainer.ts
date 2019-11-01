@@ -11,7 +11,7 @@ export const argContainer = (args: string[], map: OptionMap) => {
       if (map.has(key)) {
         result.push(args[i]);
         const option = map.get(key);
-        if (option) {
+        if (option && option.value) {
           result.push(option.value);
           i += 1;
         }

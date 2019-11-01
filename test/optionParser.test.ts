@@ -1,6 +1,6 @@
 import "jest-extended";
 import optionParser, { ParserSettings, Option, OptionMap } from "../src";
-import { empty, Operator } from "../src/models/option";
+import { empty, Operator } from "../src/lib/parse";
 import { Server } from "./testData";
 
 const getValue = (option: Option | undefined) => (option && option.value) || undefined;
@@ -59,18 +59,17 @@ describe("optionsParser", () => {
       const option2 = map.get("option2");
 
       expect(map.has("option2")).toBe(true);
-      expect(option2).toBeUndefined();
+      expect(option2 && option2.value).toBeUndefined();
     });
 
     it("can parse operator", () => {
-      test.todo("implement new parsing");
-      // const options = ["-op1=1", "-op2", "ne", "5", "-op3", "lt", "4"];
+      const options = ["-op1=1", "-op2", "ne", "5", "-op3", "lt", "4"];
 
-      // const map = optionParser.parse(options);
+      const map = optionParser.parse(options);
 
-      // expect(getOption(map, "op1").operator).toBe(Operator.Eq);
-      // expect(getOption(map, "op2").operator).toBe(Operator.Ne);
-      // expect(getOption(map, "op3").operator).toBe(Operator.Lt);
+      expect(getOption(map, "op1").operator).toBe(Operator.Eq);
+      expect(getOption(map, "op2").operator).toBe(Operator.Ne);
+      expect(getOption(map, "op3").operator).toBe(Operator.Lt);
     });
 
     it("can exclude args that isn't an option", () => {
@@ -96,7 +95,7 @@ describe("optionsParser", () => {
 
       expect(options.size).toBe(validOptionsCount);
       expect(options.has("h")).toBe(true);
-      expect(options.get("h")).toBeUndefined();
+      expect(getValue(options.get("h"))).toBeUndefined();
       expect(getValue(options.get("arg2"))).toBe("value2");
     });
 

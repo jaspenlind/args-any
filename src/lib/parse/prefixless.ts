@@ -1,11 +1,11 @@
 import { trimStart } from "lodash-es";
 import { ParserSettings } from "../../types";
 
-const dash = "-";
+export const optionMarker = "-";
 const prefixSeparator = ".";
 
 export const prefixless = (key: string, settings?: Partial<ParserSettings>): string => {
-  const prefixes = [dash];
+  const prefixes = [optionMarker];
 
   if (settings && settings.keyPrefix) {
     prefixes.push(`${settings.keyPrefix}${prefixSeparator}`);
