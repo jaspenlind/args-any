@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { convert, StringLike } from "./stringConverter";
+import { convert, StringLike } from "string-converter";
 
 export const toObject = <T, V extends StringLike | undefined>(
   map: Map<string, V> | ReadonlyMap<string, V>
