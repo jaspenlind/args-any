@@ -1,5 +1,4 @@
-# option-parser
-
+# args-any
 ## Utility lib for parsing command options
 
 [![Build Status](https://travis-ci.com/jaspenlind/option-parser.svg?branch=master)](https://travis-ci.com/jaspenlind/option-parser)
