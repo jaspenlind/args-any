@@ -1,5 +1,4 @@
-import { argsAny, OptionMap } from "./lib";
-import { parse } from "./lib/parse";
+import { argsAny, parse, OptionMap } from "./lib";
 
 export * from "./types";
 
