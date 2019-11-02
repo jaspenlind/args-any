@@ -3,7 +3,7 @@
 ## Utility lib for parsing command options
 
 [![Build Status](https://travis-ci.com/jaspenlind/option-parser.svg?branch=master)](https://travis-ci.com/jaspenlind/option-parser)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d59c0c25d1434d5d905e8933856142a1)](https://www.codacy.com/manual/jaspenlind/option-parser?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jaspenlind/option-parser&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d59c0c25d1434d5d905e8933856142a1)](https://www.codacy.com/manual/jaspenlind/option-parser?utm_source=github.com&utm_medium=referral&utm_content=jaspenlind/option-parser&utm_campaign=Badge_Grade)
 [![Coverage Status](https://coveralls.io/repos/github/jaspenlind/option-parser/badge.svg?branch=master)](https://coveralls.io/github/jaspenlind/option-parser?branch=master)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
@@ -24,29 +24,31 @@ npm test
 
 ## Usage
 
-### Parse command line arguments to a map
+### Parse arguments to a map
 
 ```ts
-import parser from "option-parser";
+import { parse } from "option-parser";
+const args = ["-option1", "value1", "-option2>4", "-option3 lt 5"]
 
-const args = ["-singleDashOption", "value1", "--doubleDashOption", "value2", "otherarg"];
+const options = parse(args);
 
-const options = parser.parse(args);
+options.has("option1");
+==> true
 
-const single = options.get("singleDashOption");
-==> "value1"
-
-const double = options.get("doubleDashOption");
-==> "value2"
-
-const otherArg = options.has("otherarg");
-==> false
+options.get("option2");
+==> {
+  key: "option2",
+  operator: Operator.Gt,
+  value: "4"
+}
 ```
 
-### Map command line arguments to a partial interface
+### Map arguments to a partial type
 
 ```ts
-import parser from "option-parser";
+import { parse } from "option-parser";
+
+const args = ["-name", "server 1", "-memorySize", "1024" , "-isClustered", "true"];
 
 interface Server {
   name: string;
@@ -55,9 +57,7 @@ interface Server {
   location: string;
 }
 
-const args = ["-name", "server 1", "-memorySize", "1024" , "-isClustered", "true"];
-
-const server = parser.parse(args).asPartial<Server>();
+const server = parse(args).asPartial<Server>();
 
 ==> {
   name: "server 1",
@@ -66,7 +66,7 @@ const server = parser.parse(args).asPartial<Server>();
 };
 ```
 
-### Filter a list based on partial properties
+### Filter a list based on arguments
 
 ```ts
 const servers = [{
@@ -80,7 +80,7 @@ const servers = [{
   memorySize: 512
 }];
 
-const filtered = parser.parse(["-memorySize", "2048"]).filter(...servers);
+const filtered = parse(["-memorySize=2048"]).filter(...servers);
 
 ==> [{
   name: "name1"

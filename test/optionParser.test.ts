@@ -1,5 +1,5 @@
 import "jest-extended";
-import optionParser, { ParserSettings, Option, OptionMap } from "../src";
+import optionParser, { ParserSettings, parse, Option, OptionMap } from "../src";
 import { empty, Operator } from "../src/lib/parse";
 import { Server } from "./testData";
 
@@ -8,6 +8,12 @@ const getOption = (map: OptionMap, key: string) => map.get(key) || empty;
 
 describe("optionsParser", () => {
   describe("parse", () => {
+    it("can parse", () => {
+      const options = parse(["-key", "value"]);
+
+      expect(options.has("key")).toBeTrue();
+    });
+
     it("can parse key with one dash", () => {
       expect(optionParser.parse(["-key"]).has("key")).toBe(true);
     });
