@@ -1,4 +1,3 @@
-import "jest-extended";
 import { Server } from "./testData";
 import { project } from "../src/lib/partialProjector";
 
@@ -48,7 +47,7 @@ describe("partialProjector", () => {
 
       const projected = project(server, projector);
 
-      expect(Object.keys(projected)).toBeEmpty();
+      expect(Object.keys(projected)).toHaveLength(0);
     });
   });
 });

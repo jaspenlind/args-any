@@ -1,4 +1,3 @@
-import "jest-extended";
 import optionParser, { ParserSettings, parse, Option, OptionMap } from "../src";
 import { empty, Operator } from "../src/lib/parse";
 import { Server } from "./testData";
@@ -11,7 +10,7 @@ describe("optionsParser", () => {
     it("can parse", () => {
       const options = parse(["-key", "value"]);
 
-      expect(options.has("key")).toBeTrue();
+      expect(options.has("key")).toBe(true);
     });
 
     it("can parse key with one dash", () => {
@@ -30,11 +29,11 @@ describe("optionsParser", () => {
     });
 
     it("is empty when args contains no key", () => {
-      expect(optionParser.parse(["nokey"])).toBeEmpty();
+      expect(optionParser.parse(["nokey"]).size).toBe(0);
     });
 
     it("can handle empty args", () => {
-      expect(optionParser.parse([])).toBeEmpty();
+      expect(optionParser.parse([]).size).toBe(0);
     });
 
     it("can parse single option", () => {

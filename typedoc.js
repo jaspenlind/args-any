@@ -2,7 +2,7 @@ module.exports = {
   exclude: ["test/**/*"],
   excludeExternals: true,
   mode: "file",
-  name: "option-parser",
+  name: "args-any",
   out: "./docs",
   theme: "default"
 };
