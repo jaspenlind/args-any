@@ -17,7 +17,7 @@ describe("optionsParser", () => {
     });
 
     it("can parse key with prefix", () => {
-      const options: ParserSettings = { keyPrefix: "filter" };
+      const options: ParserSettings = { keyPrefix: "filter", flags: [] };
 
       expect(optionParser.parse(["-filter.key"], options).has("key")).toBe(true);
       expect(optionParser.parse(["--filter.key"], options).has("key")).toBe(true);

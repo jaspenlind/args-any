@@ -15,19 +15,19 @@ const operatorMap = new CaseInsensitiveMap<string, [Operator, boolean]>([
   ["ge", [Operator.Ge, false]],
   [">=", [Operator.Ge, true]],
   ["=>", [Operator.Ge, true]],
-  ["in", [Operator.In, false]],
   ["=", [Operator.Eq, true]],
   [":", [Operator.Eq, true]]
 ]);
 
+const operatorIndex = 0;
 const defaultOperator: Operator = Object.freeze(Operator.Eq);
 const has = (operatorString: string) => operatorMap.has(operatorString);
-const inlinesAllowed = () => [...operatorMap.entries()].filter(x => x[1][1] === true).map(z => z[0]);
+const inlinesAllowed = () => [...operatorMap.entries()].filter(x => x[1][1] === true).map(z => z[operatorIndex]);
 
 const parse = (operatorString?: string): Operator => {
   const value = operatorMap.get(operatorString || "");
 
-  return (value && value[0]) || Operator.Eq;
+  return (value && value[operatorIndex]) || Operator.Eq;
 };
 
 export const operator = {

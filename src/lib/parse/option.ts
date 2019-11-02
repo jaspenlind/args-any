@@ -11,9 +11,14 @@ export const empty: Option = Object.freeze({
   value: ""
 });
 
-const flags = ["h", "debug"];
+const defaultFlags = ["h", "debug"];
+
 export const isKey = (arg: string) => arg && arg.startsWith(optionMarker);
-const isFlag = (key: string) => flags.find(x => x === prefixless(key)) !== undefined;
+
+const isFlag = (key: string, flags?: string[]) => {
+  const flagKeys = flags || defaultFlags;
+  return flagKeys.find(x => x === prefixless(key)) !== undefined;
+};
 
 export const create = (fields: Partial<Option>): Option => {
   const option = { ...empty, ...fields };
@@ -26,13 +31,15 @@ export const create = (fields: Partial<Option>): Option => {
 export const fromArgs = (key: string, args: string[], settings?: Partial<ParserSettings>): Option => {
   const [first, second] = [...args].slice(args.indexOf(key) + 1);
 
+  const flags = settings && settings.flags;
+
   let op = "";
   let value: string | undefined;
 
-  if (!isFlag(key) && first && !isKey(first) && second && !isKey(second) && operator.has(first)) {
+  if (!isFlag(key, flags) && first && !isKey(first) && second && !isKey(second) && operator.has(first)) {
     op = first;
     value = second;
-  } else if (!isFlag(key) && first && !isKey(first)) {
+  } else if (!isFlag(key, flags) && first && !isKey(first)) {
     value = first;
   }
 
@@ -40,8 +47,8 @@ export const fromArgs = (key: string, args: string[], settings?: Partial<ParserS
 };
 
 export const option = {
-  empty,
   create,
-  isKey,
-  fromArgs
+  empty,
+  fromArgs,
+  isKey
 };

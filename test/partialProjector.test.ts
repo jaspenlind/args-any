@@ -12,8 +12,8 @@ describe("partialProjector", () => {
 
     it("should have same keys as projector", () => {
       const projector: Partial<Server> = {
-        name: "server1",
-        country: "SE"
+        country: "SE",
+        name: "server1"
       };
 
       const server = createServer();

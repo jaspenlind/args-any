@@ -6,6 +6,9 @@ import { toObject } from "./mapHelper";
 
 export { Option };
 
+/**
+ * Map of `Option`
+ */
 export class OptionMap extends ReadonlyMap<string, Option> {
   private readonly settings?: Partial<ParserSettings>;
 
@@ -17,14 +20,23 @@ export class OptionMap extends ReadonlyMap<string, Option> {
     this.settings = settings;
   }
 
+  /**
+   * Creates a `Partial<T>` from the `OptionMap` with the keys and values defined in the map
+   */
   public asPartial<T>(): Partial<T> {
     return toObject(this);
   }
 
+  /**
+   * Get option by key
+   * @param key The option to fetch
+   * @returns `Option` for the specified `key`
+   */
   public get(key: string): Option | undefined {
     return super.get(prefixless(key, this.settings));
   }
 
+  /** @ignore */
   private matches<T extends OpenRecord>(item: T): boolean {
     return [...this.keys()].reduce<boolean>((acc, curr) => {
       if (acc === false) return false;
@@ -52,6 +64,11 @@ export class OptionMap extends ReadonlyMap<string, Option> {
     }, true);
   }
 
+  /**
+   * Filter a list of items based on options defined in the map
+   * @param items The items to filter
+   * @returns The items matching options in the map
+   */
   public filter<T extends OpenRecord>(...items: T[]): T[] {
     // allow this alias for now
     // eslint-disable-next-line @typescript-eslint/no-this-alias
@@ -59,6 +76,11 @@ export class OptionMap extends ReadonlyMap<string, Option> {
     return items.filter(x => this.matches.call(map, x));
   }
 
+  /**
+   * Check if an option exists in the map
+   * @param key key of the option to check
+   * @returns `true` if the option exists, otherwise `false`
+   */
   public has(key: string): boolean {
     return super.has(prefixless(key, this.settings));
   }

@@ -16,3 +16,9 @@ deploy:
     body: $TRAVIS_COMMIT_MESSAGE
     on:
       tags: true
+  - provider: pages
+    skip_cleanup: true
+    local_dir: docs/
+    github_token: $GITHUB_DEPLOYMENT_KEY
+    on:
+      tags: true
