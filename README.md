@@ -1,18 +1,18 @@
 # args-any
 ## Utility lib for parsing command options
 
-[![Build Status](https://travis-ci.com/jaspenlind/option-parser.svg?branch=master)](https://travis-ci.com/jaspenlind/option-parser)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d59c0c25d1434d5d905e8933856142a1)](https://www.codacy.com/manual/jaspenlind/option-parser?utm_source=github.com&utm_medium=referral&utm_content=jaspenlind/option-parser&utm_campaign=Badge_Grade)
-[![Coverage Status](https://coveralls.io/repos/github/jaspenlind/option-parser/badge.svg?branch=master)](https://coveralls.io/github/jaspenlind/option-parser?branch=master)
+[![Build Status](https://travis-ci.com/jaspenlind/args-any.svg?branch=master)](https://travis-ci.com/jaspenlind/args-any)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d59c0c25d1434d5d905e8933856142a1)](https://www.codacy.com/manual/jaspenlind/args-any?utm_source=github.com&utm_medium=referral&utm_content=jaspenlind/args-any&utm_campaign=Badge_Grade)
+[![Coverage Status](https://coveralls.io/repos/github/jaspenlind/args-any/badge.svg?branch=master)](https://coveralls.io/github/jaspenlind/args-any?branch=master)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-![David](https://img.shields.io/david/jaspenlind/option-parser)
-![GitHub](https://img.shields.io/github/license/jaspenlind/option-parser)
+![David](https://img.shields.io/david/jaspenlind/args-any)
+![GitHub](https://img.shields.io/github/license/jaspenlind/args-any)
 
 ## Installation
 
 ```sh
-npm install option-parser
+npm install args-any
 ```
 
 ## Test
@@ -26,7 +26,7 @@ npm test
 ### Parse arguments to a map
 
 ```ts
-import { parse } from "option-parser";
+import { parse } from "args-any";
 const args = ["-option1", "value1", "-option2>4", "-option3 lt 5"]
 
 const options = parse(args);
@@ -45,7 +45,7 @@ options.get("option2");
 ### Map arguments to a partial type
 
 ```ts
-import { parse } from "option-parser";
+import { parse } from "args-any";
 
 const args = ["-name", "server 1", "-memorySize", "1024" , "-isClustered", "true"];
 
