@@ -8,7 +8,7 @@ export { OptionMap } from "./OptionMap";
 /**
  * Parse command line arguments to a map of options
  */
-export const optionParser = {
+export const argsAny = {
   /**
    * @param args The arguments to parse
    * @param settings parser settings
@@ -18,4 +18,4 @@ export const optionParser = {
   parse: (args: string[], settings?: Partial<ParserSettings>) => new OptionMap(args, settings)
 };
 
-export default optionParser;
+export default argsAny;
