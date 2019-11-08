@@ -1,5 +1,6 @@
+import { trimStart } from "lodash";
 import { Option, Operator, ParserSettings } from "../../types";
-import { optionMarker, prefixless } from ".";
+import { optionMarker, prefixSeparator, prefixless } from ".";
 import { operator } from "./operator";
 
 export { Option, Operator };
@@ -14,6 +15,8 @@ export const empty: Option = Object.freeze({
 const defaultFlags = ["h", "debug"];
 
 export const isKey = (arg: string) => arg && arg.startsWith(optionMarker);
+export const hasPrefix = (arg: string, prefix: string) =>
+  isKey(arg) && trimStart(arg, optionMarker).startsWith(`${prefix}${prefixSeparator}`);
 
 const isFlag = (key: string, flags?: string[]) => {
   const flagKeys = flags || defaultFlags;
@@ -50,5 +53,6 @@ export const option = {
   create,
   empty,
   fromArgs,
+  hasPrefix,
   isKey
 };

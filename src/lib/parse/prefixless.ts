@@ -2,7 +2,7 @@ import { trimStart } from "lodash";
 import { ParserSettings } from "../../types";
 
 export const optionMarker = "-";
-const prefixSeparator = ".";
+export const prefixSeparator = ".";
 
 export const prefixless = (key: string, settings?: Partial<ParserSettings>): string => {
   const prefixes = [optionMarker];

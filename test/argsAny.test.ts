@@ -21,11 +21,28 @@ describe("argsAny", () => {
       expect(argsAny.parse(["--key"]).has("key")).toBe(true);
     });
 
+    it("can parse key values with quotes", () => {
+      const options = argsAny.parse(['"-key=value"']);
+
+      expect(options.has("key")).toBe(true);
+
+      const option = options.get("key");
+      expect(option && option.operator).toBe(Operator.Eq);
+      expect(option && option.value).toBe("value");
+    });
+
     it("can parse key with prefix", () => {
       const options: ParserSettings = { keyPrefix: "filter", flags: [] };
 
       expect(argsAny.parse(["-filter.key"], options).has("key")).toBe(true);
       expect(argsAny.parse(["--filter.key"], options).has("key")).toBe(true);
+    });
+
+    it("should not parse key with other prefix", () => {
+      const options: ParserSettings = { keyPrefix: "filter", flags: [] };
+
+      expect(argsAny.parse(["-other"], options).has("other")).toBe(false);
+      expect(argsAny.parse(["-other.key"], options).has("key")).toBe(false);
     });
 
     it("is empty when args contains no key", () => {

@@ -1,21 +1,29 @@
+import { trim } from "lodash";
 import { Option, ParserSettings } from "../../types";
 
 import { expandSeparator } from "./expandSeparator";
 import { option } from "./option";
-import { optionMarker, prefixless } from "./prefixless";
+import { optionMarker, prefixless, prefixSeparator } from "./prefixless";
 
 export { expandSeparator };
-export { optionMarker, prefixless };
+export { optionMarker, prefixless, prefixSeparator };
 export * from "./option";
 export { operator } from "./operator";
 
 export const parse = (args: string[], settings?: Partial<ParserSettings>): Map<string, Option> => {
+  const trimChars = '"';
+
   const normalized = args.reduce<string[]>((acc, curr) => {
-    acc.push(...expandSeparator(curr));
+    acc.push(...expandSeparator(trim(curr, trimChars)));
     return acc;
   }, []);
 
-  const keys = normalized.filter(option.isKey);
+  let keys = normalized.filter(option.isKey);
+  const keyPrefix = settings && settings.keyPrefix;
+
+  if (keyPrefix) {
+    keys = keys.filter(x => option.hasPrefix(x, keyPrefix));
+  }
 
   const map = new Map<string, Option>();
 
