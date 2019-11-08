@@ -1,4 +1,4 @@
-import { trimStart } from "lodash-es";
+import { trimStart } from "lodash";
 import { ParserSettings } from "../../types";
 
 export const optionMarker = "-";
