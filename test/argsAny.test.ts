@@ -36,6 +36,7 @@ describe("argsAny", () => {
 
       expect(argsAny.parse(["-filter.key"], options).has("key")).toBe(true);
       expect(argsAny.parse(["--filter.key"], options).has("key")).toBe(true);
+      expect(argsAny.parse(["-filter.flag=SE"], options).has("flag")).toBe(true);
     });
 
     it("should not parse key with other prefix", () => {

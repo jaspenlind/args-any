@@ -20,6 +20,7 @@ export const parse = (args: string[], settings?: Partial<ParserSettings>): Map<s
   }, []);
 
   let keys = normalized.filter(option.isKey);
+
   const keyPrefix = settings && settings.keyPrefix;
 
   if (keyPrefix) {

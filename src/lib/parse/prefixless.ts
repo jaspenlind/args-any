@@ -8,8 +8,7 @@ export const prefixless = (key: string, settings?: Partial<ParserSettings>): str
   const prefixes = [optionMarker];
 
   if (settings && settings.keyPrefix) {
-    prefixes.push(`${settings.keyPrefix}${prefixSeparator}`);
+    prefixes.push(`${optionMarker}${settings.keyPrefix}${prefixSeparator}`);
   }
-
   return trimStart(key, prefixes.join(""));
 };
