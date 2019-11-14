@@ -201,6 +201,7 @@ describe("argsAny", () => {
       expect(argsAny.parse(["-load", "ge", "40"]).filter(...servers)).toHaveLength(2);
       expect(argsAny.parse(["-load", ">=", "40"]).filter(...servers)).toHaveLength(2);
       expect(argsAny.parse(["-load", "=>", "40"]).filter(...servers)).toHaveLength(2);
+      expect(argsAny.parse(["-load=>40"]).filter(...servers)).toHaveLength(2);
     });
   });
 

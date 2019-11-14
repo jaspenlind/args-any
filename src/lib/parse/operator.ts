@@ -3,18 +3,18 @@ import { CaseInsensitiveMap, Operator } from "../../types";
 export { Operator };
 
 const operatorMap = new CaseInsensitiveMap<string, [Operator, boolean]>([
+  ["le", [Operator.Le, false]],
+  ["<=", [Operator.Le, true]],
+  ["=<", [Operator.Le, true]],
+  ["ge", [Operator.Ge, false]],
+  [">=", [Operator.Ge, true]],
+  ["=>", [Operator.Ge, true]],
   ["ne", [Operator.Ne, false]],
   ["!=", [Operator.Ne, true]],
   ["lt", [Operator.Lt, false]],
   ["<", [Operator.Lt, true]],
-  ["le", [Operator.Le, false]],
-  ["<=", [Operator.Le, true]],
-  ["=<", [Operator.Le, true]],
   ["gt", [Operator.Gt, false]],
   [">", [Operator.Gt, true]],
-  ["ge", [Operator.Ge, false]],
-  [">=", [Operator.Ge, true]],
-  ["=>", [Operator.Ge, true]],
   ["=", [Operator.Eq, true]],
   [":", [Operator.Eq, true]]
 ]);
