@@ -5,10 +5,14 @@ export const optionMarker = "-";
 export const prefixSeparator = ".";
 
 export const prefixless = (key: string, settings?: Partial<ParserSettings>): string => {
-  const prefixes = [optionMarker];
+  let trimmed = trimStart(key, optionMarker);
 
   if (settings && settings.keyPrefix) {
-    prefixes.push(`${optionMarker}${settings.keyPrefix}${prefixSeparator}`);
+    const prefix = `${settings.keyPrefix}${prefixSeparator}`;
+
+    if (trimmed.startsWith(prefix)) {
+      trimmed = trimmed.substring(prefix.length);
+    }
   }
-  return trimStart(key, prefixes.join(""));
+  return trimmed;
 };
