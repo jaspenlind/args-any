@@ -164,11 +164,13 @@ describe("argsAny", () => {
         {
           country: "Sweden",
           flag: "SE",
+          load: 1,
           name: "server1"
         },
         {
           country: "Norway",
           flag: "NO",
+          load: 2,
           name: "server2"
         }
       ];
@@ -179,6 +181,26 @@ describe("argsAny", () => {
 
       const [first] = result;
       expect(first.name).toBe("server2");
+    });
+
+    it("can return items greater or equal to filter", () => {
+      const baseServer: Server = {
+        country: "county",
+        flag: "flag",
+        load: 0,
+        name: "name"
+      };
+
+      const servers: Server[] = [
+        { ...baseServer, ...{ load: 20 } },
+        { ...baseServer, ...{ load: 50 } },
+        { ...baseServer, ...{ load: 70 } },
+        { ...baseServer, ...{ load: 10 } }
+      ];
+
+      expect(argsAny.parse(["-load", "ge", "40"]).filter(...servers)).toHaveLength(2);
+      expect(argsAny.parse(["-load", ">=", "40"]).filter(...servers)).toHaveLength(2);
+      expect(argsAny.parse(["-load", "=>", "40"]).filter(...servers)).toHaveLength(2);
     });
   });
 

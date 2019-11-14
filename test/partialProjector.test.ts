@@ -1,14 +1,8 @@
-import { Server } from "./testData";
+import { createServer, Server } from "./testData";
 import { project } from "../src/lib/partialProjector";
 
 describe("partialProjector", () => {
   describe("project", () => {
-    const createServer = (): Server => ({
-      country: "country2",
-      flag: "SE",
-      name: "server2"
-    });
-
     it("should have same keys as projector", () => {
       const projector: Partial<Server> = {
         country: "SE",

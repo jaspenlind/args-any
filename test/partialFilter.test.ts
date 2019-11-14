@@ -1,14 +1,8 @@
-import { Server } from "./testData";
+import { createServer, Server } from "./testData";
 import { filter } from "../src/lib/partialFilter";
 
 describe("partialFilter", () => {
   describe("filter", () => {
-    const createServer = (name = "name", country = "Sweden"): Server => ({
-      country,
-      flag: "flag",
-      name
-    });
-
     it("should be true when item matches filter", () => {
       const itemFilter: Partial<Server> = {
         name: "name"
@@ -36,7 +30,7 @@ describe("partialFilter", () => {
         name: "name"
       };
 
-      const item = createServer("other name", "other country");
+      const item = createServer({ name: "other name", country: "other country" });
 
       expect(filter(item, itemFilter)).toBe(false);
     });
