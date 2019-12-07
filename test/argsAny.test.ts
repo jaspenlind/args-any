@@ -32,7 +32,7 @@ describe("argsAny", () => {
     });
 
     it("can parse key with prefix", () => {
-      const options: ParserSettings = { keyPrefix: "filter", flags: [] };
+      const options = { keyPrefix: "filter", flags: [] };
 
       expect(argsAny.parse(["-filter.key"], options).has("key")).toBe(true);
       expect(argsAny.parse(["--filter.key"], options).has("key")).toBe(true);
@@ -41,7 +41,7 @@ describe("argsAny", () => {
     });
 
     it("should not parse key with other prefix", () => {
-      const options: ParserSettings = { keyPrefix: "filter", flags: [] };
+      const options = { keyPrefix: "filter", flags: [] };
 
       expect(argsAny.parse(["-other"], options).has("other")).toBe(false);
       expect(argsAny.parse(["-other.key"], options).has("key")).toBe(false);
@@ -157,6 +157,23 @@ describe("argsAny", () => {
       expect(getValue(options.get("--option1"))).toBe(value);
       expect(getValue(options.get("-filter.option1"))).toBe(value);
       expect(getValue(options.get("--filter.option1"))).toBe(value);
+    });
+  });
+
+  describe("asPartial", () => {
+    it("can project args using value as key", () => {
+      const args = ["-output=country", "-output=name", "-other=flag"];
+
+      const settings = {
+        valueAsKey: true,
+        filter: (option: Option) => option.key === "output"
+      };
+
+      const partial = argsAny.parse(args, settings).asPartial<Server>();
+
+      expect(Object.keys(partial)).toHaveLength(2);
+      expect(partial.country).toBeDefined();
+      expect(partial.name).toBeDefined();
     });
   });
 

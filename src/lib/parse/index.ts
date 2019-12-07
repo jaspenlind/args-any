@@ -21,7 +21,8 @@ export const parse = (args: string[], settings?: Partial<ParserSettings>): Map<s
 
   let keys = normalized.filter(option.isKey);
 
-  const keyPrefix = settings && settings.keyPrefix;
+  const keyPrefix = (settings && settings.keyPrefix) || false;
+  const useValueAsKey = (settings && settings.valueAsKey) || false;
 
   if (keyPrefix) {
     keys = keys.filter(x => option.hasPrefix(x, keyPrefix));
@@ -29,8 +30,19 @@ export const parse = (args: string[], settings?: Partial<ParserSettings>): Map<s
 
   const map = new Map<string, Option>();
 
+  let current = [...normalized];
+
   for (const key of keys) {
-    map.set(prefixless(key, settings), option.fromArgs(key, normalized, settings));
+    const itemValue = option.fromArgs(key, current, settings);
+    const itemKey = useValueAsKey ? itemValue.value : prefixless(key, settings);
+
+    current = current.slice(1);
+
+    const exclude = settings && settings.filter && !settings.filter(itemValue);
+
+    if (!exclude) {
+      map.set(itemKey, itemValue);
+    }
   }
 
   return map;
