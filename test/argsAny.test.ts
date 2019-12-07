@@ -1,4 +1,4 @@
-import argsAny, { ParserSettings, parse, Option, OptionMap } from "../src";
+import argsAny, { parse, Option, OptionMap } from "../src";
 import { empty, Operator } from "../src/lib/parse";
 import { Server } from "./testData";
 
@@ -165,8 +165,8 @@ describe("argsAny", () => {
       const args = ["-output=country", "-output=name", "-other=flag"];
 
       const settings = {
-        valueAsKey: true,
-        filter: (option: Option) => option.key === "output"
+        filter: (option: Option) => option.key === "output",
+        valueAsKey: true
       };
 
       const partial = argsAny.parse(args, settings).asPartial<Server>();

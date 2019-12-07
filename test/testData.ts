@@ -8,10 +8,10 @@ export interface Server {
 export const createServer = (fields?: Partial<Server>): Server => {
   const server: Server = {
     ...{
-      name: "name",
       country: "Sweden",
       flag: "flag",
-      load: 0
+      load: 0,
+      name: "name"
     },
     ...fields
   };
