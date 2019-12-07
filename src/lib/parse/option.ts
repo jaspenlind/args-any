@@ -32,7 +32,9 @@ export const create = (fields: Partial<Option>): Option => {
 };
 
 export const fromArgs = (key: string, args: string[], settings?: Partial<ParserSettings>): Option => {
-  const [first, second] = [...args].slice(args.indexOf(key) + 1);
+  const index = args.indexOf(key) + 1;
+
+  const [first, second] = [...args].slice(index);
 
   const flags = settings && settings.flags;
 

@@ -25,4 +25,16 @@ describe("parse", () => {
     expect(parsed.size).toBe(2);
     expect(parsed.has("excludeme")).toBe(false);
   });
+
+  it("can map multiple keys as value", () => {
+    const args = ["-foo=bar", "-bar=baz", "-shared=value1", "-shared=value2"];
+    const settings = {
+      filter: (option: Option) => option.key === "shared",
+      valueAsKey: true
+    };
+
+    const parsed = parse(args, settings);
+
+    expect(parsed.size).toBe(2);
+  });
 });

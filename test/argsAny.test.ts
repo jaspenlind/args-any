@@ -162,7 +162,7 @@ describe("argsAny", () => {
 
   describe("asPartial", () => {
     it("can project args using value as key", () => {
-      const args = ["-output=country", "-output=name", "-other=flag"];
+      const args = ["-foo=bar", "-output=country", "-bar=baz", "-output=name", "-other=flag"];
 
       const settings = {
         filter: (option: Option) => option.key === "output",

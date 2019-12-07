@@ -36,7 +36,7 @@ export const parse = (args: string[], settings?: Partial<ParserSettings>): Map<s
     const itemValue = option.fromArgs(key, current, settings);
     const itemKey = useValueAsKey ? itemValue.value : prefixless(key, settings);
 
-    current = current.slice(1);
+    current = current.slice(current.indexOf(key) + 1);
 
     const exclude = settings && settings.filter && !settings.filter(itemValue);
 
