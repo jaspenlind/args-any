@@ -21,8 +21,9 @@ const operatorMap = new CaseInsensitiveMap<string, [Operator, boolean]>([
 
 const operatorIndex = 0;
 const defaultOperator: Operator = Object.freeze(Operator.Eq);
-const has = (operatorString: string) => operatorMap.has(operatorString);
-const inlinesAllowed = () => [...operatorMap.entries()].filter(x => x[1][1] === true).map(z => z[operatorIndex]);
+const has = (operatorString: string): boolean => operatorMap.has(operatorString);
+const inlinesAllowed = (): string[] =>
+  [...operatorMap.entries()].filter((x) => x[1][1] === true).map((z) => z[operatorIndex]);
 
 const parse = (operatorString?: string): Operator => {
   const value = operatorMap.get(operatorString || "");

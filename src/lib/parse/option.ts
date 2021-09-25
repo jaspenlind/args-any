@@ -14,13 +14,13 @@ export const empty: Option = Object.freeze({
 
 const defaultFlags = ["h", "debug"];
 
-export const isKey = (arg: string) => arg && arg.startsWith(optionMarker);
-export const hasPrefix = (arg: string, prefix: string) =>
+export const isKey = (arg: string): boolean => (arg && arg.startsWith(optionMarker)) || false;
+export const hasPrefix = (arg: string, prefix: string): boolean =>
   isKey(arg) && trimStart(arg, optionMarker).startsWith(`${prefix}${prefixSeparator}`);
 
 const isFlag = (key: string, flags?: string[]) => {
   const flagKeys = flags || defaultFlags;
-  return flagKeys.find(x => x === prefixless(key)) !== undefined;
+  return flagKeys.find((x) => x === prefixless(key)) !== undefined;
 };
 
 export const create = (fields: Partial<Option>): Option => {

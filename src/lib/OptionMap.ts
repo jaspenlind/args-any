@@ -29,7 +29,7 @@ export class OptionMap extends ReadonlyMap<string, Option> {
     // allow this alias for now
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const map = this;
-    return items.filter(x => this.matches.call(map, x));
+    return items.filter((x) => this.matches.call(map, x));
   }
 
   /**

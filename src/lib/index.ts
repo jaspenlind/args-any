@@ -11,7 +11,7 @@ export { OptionMap } from "./OptionMap";
  *
  *    * @example ["-option1>5", "-option2", "eq", "5", "--force"]
  */
-export const parse = (args: string[], settings?: Partial<ParserSettings>) => new OptionMap(args, settings);
+export const parse = (args: string[], settings?: Partial<ParserSettings>): OptionMap => new OptionMap(args, settings);
 /**
  * Parse command line arguments to a map of options
  */

@@ -25,7 +25,7 @@ export const parse = (args: string[], settings?: Partial<ParserSettings>): Map<s
   const useValueAsKey = (settings && settings.valueAsKey) || false;
 
   if (keyPrefix) {
-    keys = keys.filter(x => option.hasPrefix(x, keyPrefix));
+    keys = keys.filter((x) => option.hasPrefix(x, keyPrefix));
   }
 
   const map = new Map<string, Option>();

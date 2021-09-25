@@ -1,6 +1,6 @@
 import { ArgContainer, OptionMap } from "../types";
 
-export const argContainer = (args: string[], map: OptionMap) => {
+export const argContainer = (args: string[], map: OptionMap): ArgContainer => {
   const all = (): string[] => args;
 
   const options = (): string[] => {
@@ -24,7 +24,7 @@ export const argContainer = (args: string[], map: OptionMap) => {
   const other = (): string[] => {
     const optionArgs = options();
 
-    return all().filter(x => !optionArgs.includes(x));
+    return all().filter((x) => !optionArgs.includes(x));
   };
 
   const container: ArgContainer = {
