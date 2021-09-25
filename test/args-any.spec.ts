@@ -1,5 +1,5 @@
-import argsAny, { Option, OptionMap, parse } from "../src";
-import { empty, Operator } from "../src/lib/parse";
+import argsAny, { Operator, Option, OptionMap, parse } from "../src";
+import { empty } from "../src/lib/parse";
 import { Server } from "./test-data";
 
 const getValue = (option: Option | undefined) => (option && option.value) || undefined;
