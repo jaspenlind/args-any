@@ -2,7 +2,7 @@ import { ParserSettings } from "../types";
 import { OptionMap } from "./OptionMap";
 
 export * from "../types";
-export { argContainer } from "./argContainer";
+export { argContainer } from "./arg-container";
 export { OptionMap } from "./OptionMap";
 
 /**

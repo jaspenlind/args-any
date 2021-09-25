@@ -2,7 +2,7 @@ import { convert } from "string-converter";
 import { ArgContainer, OpenRecord, Option, Operator, ParserSettings, ReadonlyMap } from "../types";
 import { argContainer } from ".";
 import { parse, prefixless } from "./parse";
-import { toObject } from "./mapHelper";
+import { toObject } from "./map-helper";
 
 export { Option };
 

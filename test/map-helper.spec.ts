@@ -1,5 +1,5 @@
-import { toObject } from "../src/lib/mapHelper";
-import { Server } from "./testData";
+import { toObject } from "../src/lib/map-helper";
+import { Server } from "./test-data";
 
 describe("mapHelper", () => {
   describe("toObject", () => {

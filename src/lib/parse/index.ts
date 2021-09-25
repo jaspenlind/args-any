@@ -2,7 +2,7 @@ import { trim } from "lodash";
 import { Option, ParserSettings } from "../../types";
 import { operator } from "./operator";
 
-import { expandSeparator } from "./expandSeparator";
+import { expandSeparator } from "./expand-separator";
 import { option } from "./option";
 import { optionMarker, prefixless, prefixSeparator } from "./prefixless";
 

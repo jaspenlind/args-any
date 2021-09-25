@@ -3,7 +3,7 @@
 ## Utility lib for parsing command options
 
 [![Build Status](https://travis-ci.com/jaspenlind/args-any.svg?branch=master)](https://travis-ci.com/jaspenlind/args-any)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d59c0c25d1434d5d905e8933856142a1)](https://www.codacy.com/manual/jaspenlind/args-any?utm_source=github.com&utm_medium=referral&utm_content=jaspenlind/args-any&utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/d59c0c25d1434d5d905e8933856142a1)](https://www.codacy.com/gh/jaspenlind/args-any/dashboard?utm_source=github.com&utm_medium=referral&utm_content=jaspenlind/args-any&utm_campaign=Badge_Grade)
 [![Coverage Status](https://coveralls.io/repos/github/jaspenlind/args-any/badge.svg?branch=master)](https://coveralls.io/github/jaspenlind/args-any?branch=master)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
