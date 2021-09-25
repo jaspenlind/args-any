@@ -1,7 +1,7 @@
 import { CaseInsensitiveMap } from "../maps";
 import { Operator } from "../../types";
 
-const operatorMap = new CaseInsensitiveMap<string, [Operator, boolean]>([
+const operatorMap = new CaseInsensitiveMap<[Operator, boolean]>([
   ["le", [Operator.Le, false]],
   ["<=", [Operator.Le, true]],
   ["=<", [Operator.Le, true]],

@@ -1,13 +1,5 @@
-export class CaseInsensitiveMap<K, V> extends Map<K, V> {
-  // constructor(entries?: ReadonlyArray<readonly [K, V]> | null) {
-  //   super(entries);
-  // }
-
-  public set(key: K, value: V): this {
-    if (typeof key === "string") {
-      const lowerCasedKey = <K>(<any>key.toLowerCase());
-      return super.set(lowerCasedKey, value);
-    }
-    return super.set(key, value);
+export class CaseInsensitiveMap<V> extends Map<string, V> {
+  public set(key: string, value: V): this {
+    return super.set(key.toLowerCase(), value);
   }
 }
