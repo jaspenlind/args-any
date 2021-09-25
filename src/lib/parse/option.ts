@@ -1,9 +1,7 @@
 import { trimStart } from "lodash";
-import { Option, Operator, ParserSettings } from "../../types";
+import { Option, ParserSettings } from "../../types";
 import { optionMarker, prefixSeparator, prefixless } from ".";
 import { operator } from "./operator";
-
-export { Option, Operator };
 
 export const empty: Option = Object.freeze({
   key: "",

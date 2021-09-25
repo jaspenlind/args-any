@@ -1,10 +1,8 @@
 import { convert } from "string-converter";
-import { ArgContainer, OpenRecord, Option, Operator, ParserSettings, ReadonlyMap } from "../types";
 import { argContainer } from ".";
+import { ArgContainer, OpenRecord, Option, Operator, ParserSettings, ReadonlyMap } from "../types";
 import { parse, prefixless } from "./parse";
 import { toObject } from "./map-helper";
-
-export { Option };
 
 /**
  * Map of `Option`

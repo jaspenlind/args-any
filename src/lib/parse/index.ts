@@ -6,10 +6,10 @@ import { expandSeparator } from "./expand-separator";
 import { option } from "./option";
 import { optionMarker, prefixless, prefixSeparator } from "./prefixless";
 
+export { empty } from "./option";
 export { expandSeparator };
 export { optionMarker, prefixless, prefixSeparator };
 export { operator };
-export { empty } from "./option";
 
 export const parse = (args: string[], settings?: Partial<ParserSettings>): Map<string, Option> => {
   const trimChars = '"';

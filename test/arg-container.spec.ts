@@ -1,4 +1,4 @@
-import { OptionMap } from "../src/lib";
+import { OptionMap } from "../src";
 
 const args = ["-option1", "value1", "something", "else", "-option2"];
 const map = new OptionMap(args);
