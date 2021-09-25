@@ -8,8 +8,9 @@ import { optionMarker, prefixless, prefixSeparator } from "./prefixless";
 
 export { expandSeparator };
 export { optionMarker, prefixless, prefixSeparator };
-export * from "./option";
 export { operator };
+export { empty } from "./option";
+export { Operator } from "../../types";
 
 export const parse = (args: string[], settings?: Partial<ParserSettings>): Map<string, Option> => {
   const trimChars = '"';

@@ -1,4 +1,5 @@
-import { parse, Operator, Option } from "../src/lib/parse";
+import { Operator, Option } from "../src/types";
+import { parse } from "../src/lib/parse";
 
 describe("parse", () => {
   describe("when valueAsKey is true", () => {
