@@ -1,5 +1,5 @@
 import { Option } from "../src/types";
-import { OptionMap } from "../src/lib/OptionMap";
+import { OptionMap } from "../src/lib/maps";
 
 const getValue = (option: Option | undefined) => option && option.value;
 

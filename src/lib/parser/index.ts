@@ -1,15 +1,12 @@
 import { trim } from "lodash";
-import { Option, ParserSettings } from "../../types";
-import { operator } from "./operator";
+import { option } from "./option.parser";
 
 import { expandSeparator } from "./expand-separator";
-import { option } from "./option";
-import { optionMarker, prefixless, prefixSeparator } from "./prefixless";
+import { prefixless } from "./prefixless";
+import { Option, ParserSettings } from "../../types";
 
-export { empty } from "./option";
-export { expandSeparator };
-export { optionMarker, prefixless, prefixSeparator };
-export { operator };
+export { operator } from "./operator.parser";
+export { option } from "./option.parser";
 
 export const parse = (args: string[], settings?: Partial<ParserSettings>): Map<string, Option> => {
   const trimChars = '"';

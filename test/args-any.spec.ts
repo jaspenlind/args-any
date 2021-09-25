@@ -1,9 +1,10 @@
-import argsAny, { Operator, Option, OptionMap, parse } from "../src";
-import { empty } from "../src/lib/parse";
+import { option } from "../src/lib/parser";
+import argsAny, { OptionMap, parse } from "../src";
 import { Server } from "./test-data";
+import { Operator, Option } from "../src/types";
 
-const getValue = (option: Option | undefined) => (option && option.value) || undefined;
-const getOption = (map: OptionMap, key: string) => map.get(key) || empty;
+const getValue = (opt: Option | undefined) => opt?.value || undefined;
+const getOption = (map: OptionMap, key: string) => map.get(key) || option.empty;
 
 describe("argsAny", () => {
   describe("parse", () => {
@@ -26,9 +27,9 @@ describe("argsAny", () => {
 
       expect(options.has("key")).toBe(true);
 
-      const option = options.get("key");
-      expect(option && option.operator).toBe(Operator.Eq);
-      expect(option && option.value).toBe("value");
+      const opt = options.get("key");
+      expect(opt?.operator).toBe(Operator.Eq);
+      expect(opt?.value).toBe("value");
     });
 
     it("can parse key with prefix", () => {
@@ -58,9 +59,9 @@ describe("argsAny", () => {
     it("can parse single option", () => {
       const map = argsAny.parse(["-o", "option1"]);
 
-      const option = map.get("o");
+      const opt = map.get("o");
 
-      expect(option && option.value).toBe("option1");
+      expect(opt?.value).toBe("option1");
     });
 
     it("can parse multiple options", () => {
@@ -132,11 +133,11 @@ describe("argsAny", () => {
       const valueIndex = 1;
 
       expect(option1[keyIndex]).toBe("option1");
-      expect((option1[valueIndex] || empty).value).toBe("value1");
+      expect((option1[valueIndex] || option.empty).value).toBe("value1");
       expect(option2[keyIndex]).toBe("option2");
-      expect((option2[valueIndex] || empty).value).toBe("value2");
+      expect((option2[valueIndex] || option.empty).value).toBe("value2");
       expect(option3[keyIndex]).toBe("option3");
-      expect((option3[valueIndex] || empty).value).toBe("value3");
+      expect((option3[valueIndex] || option.empty).value).toBe("value3");
     });
 
     it("can get option with or without dash", () => {
@@ -165,7 +166,7 @@ describe("argsAny", () => {
       const args = ["-foo=bar", "-output=country", "-bar=baz", "-output=name", "-other=flag"];
 
       const settings = {
-        filter: (option: Option) => option.key === "output",
+        filter: (opt: Option) => opt.key === "output",
         valueAsKey: true
       };
 

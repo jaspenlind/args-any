@@ -1,4 +1,5 @@
-import { CaseInsensitiveMap, Operator } from "../../types";
+import { CaseInsensitiveMap } from "../maps";
+import { Operator } from "../../types";
 
 const operatorMap = new CaseInsensitiveMap<string, [Operator, boolean]>([
   ["le", [Operator.Le, false]],
