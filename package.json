@@ -1,6 +1,6 @@
 {
   "name": "args-any",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Utility lib for parsing command options",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
