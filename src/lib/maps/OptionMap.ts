@@ -1,8 +1,7 @@
 import { convert } from "string-converter";
-import { argContainer } from "..";
-import { parse } from "../parser";
-import { prefixless } from "../parser/prefixless";
-import { toObject } from "../map-helper";
+import { parseArgs } from "../parser/args.parser";
+import { prefixlessKey } from "../parser/prefixless-key.parser";
+import { toObject } from "../partial";
 import { ArgContainer, OpenRecord, Option, Operator, ParserSettings, ReadonlyMap } from "../../types";
 
 /**
@@ -11,11 +10,33 @@ import { ArgContainer, OpenRecord, Option, Operator, ParserSettings, ReadonlyMap
 export class OptionMap extends ReadonlyMap<string, Option> {
   public readonly args: ArgContainer;
 
-  private readonly settings?: Partial<ParserSettings>;
+  private mapArgs() {
+    const options = this.arg.reduce<string[]>((acc, curr) => {
+      if (this.has(curr)) {
+        acc.push(curr);
 
-  constructor(args: string[], settings?: Partial<ParserSettings>) {
-    super(parse(args, settings));
-    this.args = argContainer(args, this);
+        const option = this.get(curr);
+        if (option?.value) {
+          acc.push(option.value);
+        }
+      }
+      return acc;
+    }, []);
+
+    return {
+      all: () => this.arg,
+      options: () => options,
+      other: () => this.arg.filter((x) => !options.includes(x))
+    };
+  }
+
+  constructor(private arg: string[], private settings?: Partial<ParserSettings>) {
+    super(parseArgs(arg, settings));
+    // this.args = args;
+
+    this.args = this.mapArgs();
+
+    // this.args = argContainer(arg, this);
     this.settings = settings;
   }
 
@@ -37,7 +58,7 @@ export class OptionMap extends ReadonlyMap<string, Option> {
    * @returns `true` if the option exists, otherwise `false`
    */
   public has(key: string): boolean {
-    return super.has(prefixless(key, this.settings));
+    return super.has(prefixlessKey.parse(key, this.settings));
   }
 
   /**
@@ -53,7 +74,7 @@ export class OptionMap extends ReadonlyMap<string, Option> {
    * @returns `Option` for the specified `key`
    */
   public get(key: string): Option | undefined {
-    return super.get(prefixless(key, this.settings));
+    return super.get(prefixlessKey.parse(key, this.settings));
   }
 
   /** @ignore */

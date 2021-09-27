@@ -9,6 +9,40 @@ interface Server {
 }
 
 describe("OptionMap", () => {
+  describe("args", () => {
+    const allArgs = ["-option1", "value1", "something", "else", "-option2"];
+    const argMap = new OptionMap(allArgs);
+
+    it("should have all args", () => {
+      expect(argMap.args.all()).toBe(allArgs);
+    });
+
+    it("should have options", () => {
+      const optionArgs = ["-option1", "value1", "-option2"];
+      const [first, second, third] = optionArgs;
+      const argLength = optionArgs.length;
+
+      const result = argMap.args.options();
+
+      expect(result).toHaveLength(argLength);
+      expect(result.includes(first)).toBe(true);
+      expect(result.includes(second)).toBe(true);
+      expect(result.includes(third)).toBe(true);
+    });
+
+    it("should have other args", () => {
+      const otherArgs = ["something", "else"];
+      const [first, second] = otherArgs;
+      const argLength = otherArgs.length;
+
+      const result = argMap.args.other();
+
+      expect(result).toHaveLength(argLength);
+      expect(result.includes(first)).toBe(true);
+      expect(result.includes(second)).toBe(true);
+    });
+  });
+
   describe("has", () => {
     it("should be true when key exists", () => {
       const map = new OptionMap(["-h"]);

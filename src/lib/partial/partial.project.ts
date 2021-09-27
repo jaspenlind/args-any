@@ -1,4 +1,4 @@
-import { OpenRecord } from "../types";
+import { OpenRecord } from "../../types";
 
 export const project = <T extends OpenRecord>(item: T, projector: Partial<T>): Partial<T> => {
   const definedKeys = Object.keys(projector);

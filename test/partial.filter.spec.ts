@@ -1,4 +1,4 @@
-import { filter } from "../src/lib/partial-filter";
+import { filter } from "../src/lib/partial";
 import { createServer, Server } from "./test-data";
 
 describe("partialFilter", () => {

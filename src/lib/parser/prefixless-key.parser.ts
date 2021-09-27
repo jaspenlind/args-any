@@ -4,7 +4,7 @@ import { ParserSettings } from "../../types";
 export const optionMarker = "-";
 export const prefixSeparator = ".";
 
-export const prefixless = (key: string, settings?: Partial<ParserSettings>): string => {
+export const parsePrefixlessKey = (key: string, settings?: Partial<ParserSettings>): string => {
   let trimmed = trimStart(key, optionMarker);
 
   if (settings && settings.keyPrefix) {
@@ -15,4 +15,8 @@ export const prefixless = (key: string, settings?: Partial<ParserSettings>): str
     }
   }
   return trimmed;
+};
+
+export const prefixlessKey = {
+  parse: parsePrefixlessKey
 };

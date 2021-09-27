@@ -2,7 +2,6 @@ import { ParserSettings } from "../types";
 import { OptionMap } from "./maps";
 
 export * from "../types";
-export { argContainer } from "./arg-container";
 
 /**
  * @param args The arguments to parse

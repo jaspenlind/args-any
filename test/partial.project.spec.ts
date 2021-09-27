@@ -1,4 +1,4 @@
-import { project } from "../src/lib/partial-projector";
+import { project } from "../src/lib/partial";
 import { createServer, Server } from "./test-data";
 
 describe("partialProjector", () => {

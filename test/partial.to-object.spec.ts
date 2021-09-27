@@ -1,4 +1,4 @@
-import { toObject } from "../src/lib/map-helper";
+import { toObject } from "../src/lib/partial";
 import { Server } from "./test-data";
 
 describe("mapHelper", () => {

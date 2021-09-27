@@ -1,6 +1,6 @@
 import { trimStart } from "lodash";
 import { operator } from "./operator.parser";
-import { optionMarker, prefixless, prefixSeparator } from "./prefixless";
+import { optionMarker, parsePrefixlessKey, prefixSeparator } from "./prefixless-key.parser";
 import { Option, ParserSettings } from "../../types";
 
 export const empty: Option = Object.freeze({
@@ -18,7 +18,7 @@ export const hasPrefix = (arg: string, prefix: string): boolean =>
 
 const isFlag = (key: string, flags?: string[]) => {
   const flagKeys = flags || defaultFlags;
-  return flagKeys.find((x) => x === prefixless(key)) !== undefined;
+  return flagKeys.find((x) => x === parsePrefixlessKey(key)) !== undefined;
 };
 
 export const create = (fields: Partial<Option>): Option => {
@@ -29,7 +29,7 @@ export const create = (fields: Partial<Option>): Option => {
   return option;
 };
 
-export const fromArgs = (key: string, args: string[], settings?: Partial<ParserSettings>): Option => {
+export const optionParser = (key: string, args: string[], settings?: Partial<ParserSettings>): Option => {
   const index = args.indexOf(key) + 1;
 
   const [first, second] = [...args].slice(index);
@@ -46,13 +46,13 @@ export const fromArgs = (key: string, args: string[], settings?: Partial<ParserS
     value = first;
   }
 
-  return create({ key: prefixless(key, settings), operator: operator.parse(op), value });
+  return create({ key: parsePrefixlessKey(key, settings), operator: operator.parse(op), value });
 };
 
 export const option = {
   create,
   empty,
-  fromArgs,
+  parse: optionParser,
   hasPrefix,
   isKey
 };

@@ -24,7 +24,7 @@ const has = (operatorString: string): boolean => operatorMap.has(operatorString)
 const inlinesAllowed = (): string[] =>
   [...operatorMap.entries()].filter((x) => x[1][1] === true).map((z) => z[operatorIndex]);
 
-const parse = (operatorString?: string): Operator => {
+export const parseOperator = (operatorString?: string): Operator => {
   const value = operatorMap.get(operatorString || "");
 
   return (value && value[operatorIndex]) || Operator.Eq;
@@ -34,5 +34,5 @@ export const operator = {
   default: defaultOperator,
   has,
   inlinesAllowed,
-  parse
+  parse: parseOperator
 };
