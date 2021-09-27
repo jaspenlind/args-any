@@ -1,5 +1,5 @@
-import { OpenRecord } from "../../types";
 import { project } from ".";
+import { OpenRecord } from "../../types";
 
 export const filter = <T extends OpenRecord>(item: T, predicateFilter: Partial<T>): boolean => {
   const projection = project(item, predicateFilter);
