@@ -1,5 +1,5 @@
 # Ignore rules
-
+.DS_Store
 coverage
 docs
 dist
